@@ -2,8 +2,7 @@
 #include "CellMatrix.h"
 #include "Neighbourhood.h"
 #include <cassert>				//for assert for CellMatrix::travelCellMatrix
-#include <vector>
-#include <iterator>
+
 
 
 // constructors
@@ -31,8 +30,7 @@ void CellMatrix::setSize(int x, int y)
 void CellMatrix::randomizeMatrix()	{ travelCellMatrix(&Cell::randomize, mMatrix.begin(), mMatrix.end()); }
 
 void CellMatrix::show()				{ travelCellMatrix(&Cell::show, mMatrix.begin(), mMatrix.end()); }
-
-
+									//travelCellMatrix(&Cell::setStateActive, currentCell, currentCell + std::stoi(multiplier));
 void CellMatrix::travelCellMatrix(void(Cell::*task)(), itCM currentCell, itCM finish)
 {
 	assert(finish < mMatrix.end());

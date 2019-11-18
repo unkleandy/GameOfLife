@@ -11,8 +11,9 @@
 #ifndef _CELLMATRIX_H_
 #define _CELLMATRIX_H_
 
-#include <vector>		//for vector
 #include "Cell.h"
+#include <vector>		//for vector
+#include <iterator>
 
 
 using itCM = std::vector<Cell>::iterator;

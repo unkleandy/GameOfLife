@@ -75,6 +75,9 @@
     <ClCompile Include="Console\ConsoleWriter.cpp">
       <Filter>Fichiers sources\Console</Filter>
     </ClCompile>
+    <ClCompile Include="Rule.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cell.h">

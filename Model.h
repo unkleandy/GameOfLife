@@ -12,14 +12,14 @@
 #define _MODEL_H_
 
 #include "CellMatrix.h"
-//#include "Rule.h"
+#include "Rule.h"
 
 
 class Model
 {
 private:
-	CellMatrix cm;
-	//Rule rule;
+	CellMatrix mCM;
+	Rule rule;
 
 public:
 	Model();
@@ -28,6 +28,7 @@ public:
 	void update();
 	void nextrule();
 	void reinitialise();
+	CellMatrix cellmatrix() { return mCM; }
 };
 
 

@@ -32,7 +32,7 @@ public:
 	RleUtil(std::string path);
 	RleUtil();
 	// getters
-	//Rule rule();
+	Rule rule();
 	CellMatrix cellmatrix();
 };
 
