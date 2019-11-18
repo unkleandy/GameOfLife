@@ -12,8 +12,8 @@
 #define _RLEUTIL_H_
 
 
-//#include "CellMatrix.h"
-//#include "Rule.h"
+#include "CellMatrix.h"
+#include "Rule.h"
 #include <fstream>
 #include <string>
 #include <vector>
@@ -22,18 +22,18 @@
 class RleUtil
 {
 private:
-	//Rule mRule;
-	//CellMatrix mCM;
+	Rule mRule;
+	CellMatrix mCM;
 	std::vector<int> string2IntVect(std::string str);
 	void setMatrixFromString(std::string);
-	//void nextLine(itCM& it, int mult);
+	void nextLine(itCM& it, int mult);
 public:
 	void setDimRuleFromString(std::string str);
 	RleUtil(std::string path);
 	RleUtil();
 	// getters
 	//Rule rule();
-	//CellMatrix cellmatrix();
+	CellMatrix cellmatrix();
 };
 
 

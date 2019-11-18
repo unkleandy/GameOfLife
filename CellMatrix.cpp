@@ -23,7 +23,7 @@ void CellMatrix::setSize(int x, int y)
 	mDimX = x;
 	mDimY = y;
 	mMatrix.resize(x*y);
-	initializeMatrix0;
+	initializeMatrix0();
 }
 
 

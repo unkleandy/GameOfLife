@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\Console">
+      <UniqueIdentifier>{2402dec2-b8b4-42b3-8ec2-f7fbe5662dcd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Cell.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="CellMatrix.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Controler.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOfLife.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Neighbourhood.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="rleUtil.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="View.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\Console.cpp">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsoleColor.cpp">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsoleContext.cpp">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsoleImage.cpp">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsoleKeyEvent.cpp">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsoleKeyFilterDown.cpp">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsoleKeyFilterModifiers.cpp">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsoleKeyFilterUp.cpp">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsoleKeyReader.cpp">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsolePixel.cpp">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsoleWriter.cpp">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cell.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="CellMatrix.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Controler.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOfLife.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Neighbourhood.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="rleUtil.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\Console.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleColor.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleContext.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleImage.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleKeyEvent.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleKeyFilter.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleKeyFilterAny.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleKeyFilterDown.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleKeyFilterModifiers.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleKeyFilterUp.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleKeyReader.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsolePixel.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleWriter.h">
+      <Filter>Fichiers sources\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fichiers_test_rle\validation_invalid_header_1.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_invalid_header_2.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_invalid_header_exceed_height.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_invalid_header_exceed_width.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_invalid_invalid_size_1.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_invalid_invalid_size_2.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_invalid_missing_end_of_sequence_char.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_invalid_size_0.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_invalid_size_no_size.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_valid_but_too_big_otcametapixel.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_valid_no_rule.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_valid_with_000_header.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_valid_with_100_header.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="fichiers_test_rle\validation_valid_with_comments_at_the_end.rle">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+  </ItemGroup>
+</Project>

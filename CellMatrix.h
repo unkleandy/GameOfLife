@@ -1,3 +1,11 @@
+// Context		:	A2019 420-B52 Travail-Pratique 1
+// Teacher		:	Jean-Christophe Demers
+// Contents		:	CellMatrix Class
+// Description	:	
+// Autrice		:	Andrea Cohen
+// Date			:	2019-11-16
+// Comments		:	
+
 
 #pragma once
 #ifndef _CELLMATRIX_H_
@@ -6,17 +14,6 @@
 #include <vector>		//for vector
 #include "Cell.h"
 
-
-
-class Rule {
-private:
-	int mRule;
-
-public:
-	Rule() : mRule{ 0 } {}
-	int rule() { return mRule; }
-	void nextRule() { ++mRule; }
-};
 
 using itCM = std::vector<Cell>::iterator;
 

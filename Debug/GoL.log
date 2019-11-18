@@ -1,0 +1,14 @@
+﻿  GameOfLife.cpp
+y:\b52-dev-env_bd\gol\gol\gameoflife.cpp(8): error C2039: 'survive' : n'est pas membre de 'Rule'
+  y:\b52-dev-env_bd\gol\gol\rule.h(3): note: voir la déclaration de 'Rule'
+y:\b52-dev-env_bd\gol\gol\gameoflife.cpp(9): error C2039: 'born' : n'est pas membre de 'Rule'
+  y:\b52-dev-env_bd\gol\gol\rule.h(3): note: voir la déclaration de 'Rule'
+  rleUtil.cpp
+y:\b52-dev-env_bd\gol\gol\rleutil.cpp(29): warning C4129: 'd' : caractère de séquence d'échappement non reconnu
+y:\b52-dev-env_bd\gol\gol\rleutil.cpp(29): warning C4129: '/' : caractère de séquence d'échappement non reconnu
+y:\b52-dev-env_bd\gol\gol\rleutil.cpp(68): warning C4129: '!' : caractère de séquence d'échappement non reconnu
+y:\b52-dev-env_bd\gol\gol\rleutil.cpp(74): warning C4129: '$' : caractère de séquence d'échappement non reconnu
+y:\b52-dev-env_bd\gol\gol\rleutil.cpp(83): warning C4018: '<' : incompatibilité signed/unsigned
+y:\b52-dev-env_bd\gol\gol\rleutil.cpp(91): error C3867: 'Cell::setStateActive' : syntaxe non-standard ; utilisez '&' pour créer un pointeur vers un membre
+y:\b52-dev-env_bd\gol\gol\rleutil.cpp(130): warning C4129: '/' : caractère de séquence d'échappement non reconnu
+  Génération de code en cours...

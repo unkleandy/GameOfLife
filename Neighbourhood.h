@@ -1,3 +1,12 @@
+// Context		:	A2019 420-B52 Travail-Pratique 1
+// Teacher		:	Jean-Christophe Demers
+// Contents		:	Neighbourhood Class
+// Description	:	
+// Autrice		:	Andrea Cohen
+// Date			:	2019-11-16
+// Comments		:	
+
+
 #pragma once
 #ifndef _NEIGHBOURHOOD_H_
 #define _NEIGHBOURHOOD_H_

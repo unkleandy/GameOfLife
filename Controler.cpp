@@ -10,15 +10,15 @@ Controller::~Controller()
 {
 }
 
-
-int main() {
-	srand(unsigned int(time(nullptr)));
-	Model m;
-	View v;
-	Controller(m, v);
-
-	return 0;
-}
+//
+//int main() {
+//	srand(unsigned int(time(nullptr)));
+//	Model m;
+//	View v;
+//	Controller(m, v);
+//
+//	return 0;
+//}
 
 //
 //class Controller

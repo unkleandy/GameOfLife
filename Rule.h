@@ -7,8 +7,8 @@ private:
 	int b;
 public:
 	Rule() { s = 0; b = 0; }
-	int survive();
-	int born();
+	//int survive();
+	//int born();
 
 
 };

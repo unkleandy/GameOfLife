@@ -2,13 +2,6 @@
 
 
 
-View::View()
-{
-}
 
-
-View::~View()
-{
-}
 
 //	void showCurrent(Model);
