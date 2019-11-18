@@ -17,10 +17,14 @@ private:
 
 	
 public:
-	Neighbourhood();
+	Neighbourhood(CellMatrix);
 
 	~Neighbourhood();
+
+	//getters
 	int sum();
+	Cell::cellstate state();
+	void it(itCM);
 };
 
 #endif // !_NEIGHBOURHOOD_H_

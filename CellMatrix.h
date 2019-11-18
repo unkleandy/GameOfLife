@@ -1,9 +1,10 @@
-#pragma once
 
+#pragma once
 #ifndef _CELLMATRIX_H_
 #define _CELLMATRIX_H_
 
 #include <vector>		//for vector
+#include "Cell.h"
 
 
 
@@ -21,27 +22,21 @@ using itCM = std::vector<Cell>::iterator;
 
 class CellMatrix {
 private:
-	int mX;
-	int mY;
-	std::vector<Cell> mVec;
+	int mDimX;
+	int mDimY;
+	std::vector<Cell> mMatrix;
 public:
 	CellMatrix();
 	CellMatrix(int x, int y);
-	std::vector<Cell> vec() { return mVec; }
-	void setsize(int, int);
+	std::vector<Cell> vec() { return mMatrix; }
+	void setSize(int, int);
 	void initializeMatrix0();
-	void initialiseFirstRow();
-	void travelCellMatrix(void(Cell::*task)(), itCM, itCM);
-	void applyRule(itCM start, itCM finish, Rule r);
-	int findCombination(itCM index);
+	void randomizeMatrix();
+	void travelCellMatrix(void(Cell::*task)(), itCM start, itCM finish);
+	void show();
 	int x();
 	int y();
-	std::vector<Cell> vec()
+	std::vector<Cell> matrix();
 };
 
-
-
-
-
-
-#endif // _CELLMATRIX_H_
+#endif // !_CELLMATRIX_H_
