@@ -15,7 +15,7 @@ void GameOfLife::importAndCenterCellmatrix(CellMatrix rleCM)
 {
 	mCurrentCM.initializeMatrix0();
 	int xSurplus { mCurrentCM.x() - rleCM.x() };
-	int yBegin { mCurrentCM.y() - rleCM.y() / 2 };
+	int yBegin { (mCurrentCM.y() - rleCM.y()) / 2 };
 
 	//sets the iterator at the beginning position to center the imported CellMatrix
 	itCM itGoL{ (mCurrentCM.matrix().begin() + yBegin * mCurrentCM.x() + (int) xSurplus/2) };

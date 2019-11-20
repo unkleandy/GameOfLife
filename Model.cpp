@@ -3,7 +3,7 @@
 
 
 // constructor
-Model::Model() : mGoL{ 0, 0 } { mCM.setSize(0, 0); mRule.setRule({}, {}); }
+Model::Model() : mGoL{ 100, 100 } { mCM.setSize(0, 0); mRule.setRule({}, {}); }
 
 
 void Model::setCellMatrix(int x, int y) { mCM.setSize(x, y); }

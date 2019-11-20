@@ -48,6 +48,7 @@ void Controller::run()
 	RleUtil rle;
 	rle.setDimRuleFromString(txt);
 	rle.setMatrixFromString(matrix);
+	
 	mModel.gol().importAndCenterCellmatrix(rle.cellmatrix());
 	mModel.gol().cellmatrix().show();
 
@@ -57,13 +58,13 @@ Controller::~Controller()
 {
 }
 
-//
-//int main() {
-//	srand(unsigned int(time(nullptr)));
-//	Model m;
-//	View v;
-//	Controller c(m, v);
-//	c.run();
-//
-//	return 0;
-//}
+
+int main() {
+	srand(unsigned int(time(nullptr)));
+	Model m;
+	View v;
+	Controller c(m, v);
+	c.run();
+
+	return 0;
+}

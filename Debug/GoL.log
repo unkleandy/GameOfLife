@@ -1,5 +1,4 @@
-﻿  Controler.cpp
-  GameOfLife.cpp
-  Model.cpp
-  Génération de code en cours...
+﻿  rleUtil.cpp
+y:\b52-dev-env_bd\gol\gol\rleutil.cpp(66): warning C4244: 'argument' : conversion de 'double' en 'const int', perte possible de données
+y:\b52-dev-env_bd\gol\gol\rleutil.cpp(81): warning C4018: '<' : incompatibilité signed/unsigned
   GoL.vcxproj -> Y:\B52-Dev-Env_BD\GoL\Debug\GoL.exe
