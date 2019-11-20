@@ -2,7 +2,7 @@
 // Teacher		:	Jean-Christophe Demers
 // Contents		:	CellMatrix Class
 // Description	:	
-// Autrice		:	Andrea Cohen
+// Author		:	Andrea Cohen
 // Date			:	2019-11-16
 // Comments		:	
 
@@ -34,7 +34,7 @@ public:
 	void show();
 	int x();
 	int y();
-	std::vector<Cell> matrix();
+	std::vector<Cell> & matrix();
 };
 
 #endif // !_CELLMATRIX_H_

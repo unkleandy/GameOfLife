@@ -1,5 +1,5 @@
 ﻿  Controler.cpp
+  GameOfLife.cpp
   Model.cpp
   Génération de code en cours...
-Controler.obj : error LNK2019: symbole externe non rÚsolu "public: void __thiscall Model::setCellMatrix(int,int)" (?setCellMatrix@Model@@QAEXHH@Z) rÚfÚrencÚ dans la fonction "public: void __thiscall Controller::run(void)" (?run@Controller@@QAEXXZ)
-Y:\B52-Dev-Env_BD\GoL\Debug\GoL.exe : fatal error LNK1120: 1 externes non rÚsolus
+  GoL.vcxproj -> Y:\B52-Dev-Env_BD\GoL\Debug\GoL.exe

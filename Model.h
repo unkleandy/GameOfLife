@@ -13,22 +13,25 @@
 
 #include "CellMatrix.h"
 #include "Rule.h"
+#include "GameOfLife.h"
 
 
 class Model
 {
 private:
 	CellMatrix mCM;
-	Rule rule;
+	Rule mRule;
+	GameOfLife mGoL;
 
 public:
 	Model();
-	~Model();
 	void setCellMatrix(int, int);
 	void update();
 	void nextrule();
 	void reinitialise();
-	CellMatrix cellmatrix() { return mCM; }
+	CellMatrix & cellmatrix();
+	GameOfLife & gol();
+	
 };
 
 

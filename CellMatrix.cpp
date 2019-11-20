@@ -2,6 +2,7 @@
 #include "CellMatrix.h"
 #include "Neighbourhood.h"
 #include <cassert>				//for assert for CellMatrix::travelCellMatrix
+#include <iostream>				//for cout in CellMatrix show
 
 
 
@@ -29,8 +30,20 @@ void CellMatrix::setSize(int x, int y)
 // member methods that use travelCellMatrix
 void CellMatrix::randomizeMatrix()	{ travelCellMatrix(&Cell::randomize, mMatrix.begin(), mMatrix.end()); }
 
-void CellMatrix::show()				{ travelCellMatrix(&Cell::show, mMatrix.begin(), mMatrix.end()); }
-									//travelCellMatrix(&Cell::setStateActive, currentCell, currentCell + std::stoi(multiplier));
+void CellMatrix::show()				//{ travelCellMatrix(&Cell::show, mMatrix.begin(), mMatrix.end()); }
+{
+	itCM currentCell{ mMatrix.begin() };
+	for (int j{}; j < mDimY; ++j)
+	{
+		for (int i{ 0 }; i < mDimX; ++i)
+		{
+			(*currentCell).show();
+			++currentCell;
+		}
+		std::cout << std::endl;
+	}
+}
+
 void CellMatrix::travelCellMatrix(void(Cell::*task)(), itCM currentCell, itCM finish)
 {
 	assert(finish < mMatrix.end());
@@ -49,4 +62,4 @@ int CellMatrix::x() { return mDimX; }
 
 int CellMatrix::y() { return mDimY; }
 
-std::vector<Cell> CellMatrix::matrix() { return mMatrix; }
+std::vector<Cell> & CellMatrix::matrix() { return mMatrix; }

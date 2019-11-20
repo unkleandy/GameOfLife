@@ -1,7 +1,7 @@
 #include "GameOfLife.h"
 
 
-GameOfLife::GameOfLife(int x, int y)	:mCurrentCM{x, y}, mNewCM{x, y}, mHood {mCurrentCM}	{}
+GameOfLife::GameOfLife(int x, int y)	:mCurrentCM{x, y}, mEvolvedCM{x, y}, mHood {mCurrentCM}	{}
 
 Cell::cellstate GameOfLife::newCellState()
 {
@@ -18,7 +18,7 @@ void GameOfLife::importAndCenterCellmatrix(CellMatrix rleCM)
 	int yBegin { mCurrentCM.y() - rleCM.y() / 2 };
 
 	//sets the iterator at the beginning position to center the imported CellMatrix
-	itCM itGoL{ mCurrentCM.matrix().begin()+ yBegin*mCurrentCM.x()+xSurplus/2};
+	itCM itGoL{ (mCurrentCM.matrix().begin() + yBegin * mCurrentCM.x() + (int) xSurplus/2) };
 	itCM itRLE{ rleCM.matrix().begin() };
 	for (int j{}; j < rleCM.y(); ++j)
 	{
@@ -37,13 +37,16 @@ void GameOfLife::importAndCenterCellmatrix(CellMatrix rleCM)
 void GameOfLife::evolveMatrix()
 {
 	itCM currentCell { mCurrentCM.matrix().begin() };
-	itCM evolvedCell { mNewCM.matrix().begin() };
+	itCM evolvedCell { mEvolvedCM.matrix().begin() };
 
 	while (currentCell != mCurrentCM.matrix().end())
 	{
-		mHood.it(currentCell);
+		mHood.setIt(currentCell);
 		(*evolvedCell).setState(newCellState());
 		++currentCell;
 		++evolvedCell;
 	}
 }
+
+CellMatrix & GameOfLife::cellmatrix() { return  mCurrentCM; }
+

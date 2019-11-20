@@ -25,15 +25,16 @@ private:
 	Rule mRule;
 	CellMatrix mCM;
 	std::vector<int> string2IntVect(std::string str);
-	void setMatrixFromString(std::string);
 	void nextLine(itCM& it, int mult);
 public:
+	void setMatrixFromString( std::string );
+	//void setMatrixFromSmatch(const std::smatch &);
 	void setDimRuleFromString(std::string str);
 	RleUtil(std::string path);
 	RleUtil();
 	// getters
 	Rule rule();
-	CellMatrix cellmatrix();
+	CellMatrix & cellmatrix();
 };
 
 

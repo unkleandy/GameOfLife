@@ -21,16 +21,16 @@
 class GameOfLife
 {
 	CellMatrix mCurrentCM;
-	CellMatrix mNewCM;
+	CellMatrix mEvolvedCM;
 	Rule mRule;
 	Neighbourhood mHood;
 public:
-	GameOfLife();
 	GameOfLife(int, int);
 	Cell::cellstate newCellState();
 	Cell::cellstate applyRule(int rule, int sum);
 	void importAndCenterCellmatrix(CellMatrix rleCM);
 	void evolveMatrix();
+	CellMatrix & cellmatrix();
 
 };
 

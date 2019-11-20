@@ -9,15 +9,16 @@
 // headers
 #include "rleUtil.h"
 
-//int main()
-//{
-//	std::string txt="x = 76, y = 53, rule = B3/S23 \nobo$b2o$bo17$20bo$21b2o$20b2o5$51b2o$52bo$52bobo$42bo10b2o$40b3o$39bo$\n39b2o$24b2o48b2o$25bo48b2o$25bob2o$26bo2bo23bo$27b2o24bo$42b2o9b3o$42b\n2o11bo4$51bo3b2o$50bobo3bo$49bobo3bo$45b2obobo3bo$45b2obo2b4obo5b2o$\n49bobo3bobo5bo$45b2ob2o2bo2bobo2b3o$46bobo2b2o3bo3bo$34b2o10bobo$34b2o\n11bo!";
-//	RleUtil rle;
-//	rle.setDimRuleFromString(txt);
-//	rle.setDimRuleFromString(txt);
-//	//rle.cellmatrix().show;
-//	return 0;
-//}
+int main()
+{
+	std::string txt="x = 76, y = 53, rule = B3/S23 ";
+	std::string matrix = "\nobo$b2o$bo17$20bo$21b2o$20b2o5$51b2o$52bo$52bobo$42bo10b2o$40b3o$39bo$\n39b2o$24b2o48b2o$25bo48b2o$25bob2o$26bo2bo23bo$27b2o24bo$42b2o9b3o$42b\n2o11bo4$51bo3b2o$50bobo3bo$49bobo3bo$45b2obobo3bo$45b2obo2b4obo5b2o$\n49bobo3bobo5bo$45b2ob2o2bo2bobo2b3o$46bobo2b2o3bo3bo$34b2o10bobo$34b2o\n11bo!";
+	RleUtil rle;
+	rle.setDimRuleFromString(txt);
+	rle.setMatrixFromString(matrix);
+	rle.cellmatrix().show();
+	return 0;
+}
 
 #
 RleUtil::RleUtil() :mCM{} {}
@@ -30,18 +31,21 @@ RleUtil::RleUtil(std::string path)
 
 	std::regex reComment("#[NnCcOcRr].*");
 	std::regex reDimRule("[Xx] *= *[[:digit:]][[:digit:]]*, *[Yy] *= *[[:digit:]][[:digit:]]* *, *[Rr]ule *= *[Bb]?[[:digit:]][[:digit:]]*\\/[Ss]?[[:digit:]][[:digit:]]*");
+	std::regex reLastLine("[ob$\\d]*!.*");
 
 	std::string line{};
 	std::string dimRuleInfo{};
 	std::string matrixInfo{};
+	bool info{};
+	bool lastline{};
 
 	while (getline(fstream, line))
-
 	{
 		if (line.length() == 0) {}
 		else if (std::regex_match(line, reComment)) {}
-		else if (std::regex_match(line, reDimRule)) { dimRuleInfo = line; }
-		else if (dimRuleInfo.length() != 0) { matrixInfo += line; }
+		else if (std::regex_match(line, reDimRule)) { dimRuleInfo = line; bool info = true; }
+		else if (info==true && lastline==false) { matrixInfo += line; }
+		if (std::regex_match(line, reLastLine)) { lastline = true; }
 	}
 
 // testing
@@ -67,46 +71,38 @@ void RleUtil::nextLine(itCM& it, int mult)
 void RleUtil::setMatrixFromString(std::string str)
 {
 
-//TODO add regex to cut string at '!'	
-	std::regex trim("(([[:space:]].*)*\\!)");
-	std::smatch trimStr;
-	std::regex_search(str, trimStr, trim);
-	str = trimStr.str(1);
-	// the regex search ensures that there are no other characters 
-	// and that the default switchcase will always be a number
-	std::regex limitedChars("[ob\\$[[:digit:]]]");
-	std::smatch matches;
-	std::regex_search(str, matches, limitedChars);
 	itCM currentCell { mCM.matrix().begin() };
 	int cellsInLine{};
 	int cellLine{};
 
-	std::string multiplier{ nullptr };
+	std::string multiplier{};
 	int mult{};
-	char c{};
 
-	for (int i{}; i<matches.size();++i)
-	{
-		c = matches.str(i)[0];
-		switch(c)
+	for (int i{}; i<str.length();++i)
+	{	
+		switch(str[i])
 		{
 		case 'o':
-			mult = (multiplier[0]) ? stoi(multiplier) : 1;
+			mult = ((multiplier.size()==0) ? 1 : stoi(multiplier));
 			assert(currentCell + std::stoi(multiplier) < mCM.matrix().end());
-			mCM.travelCellMatrix(&Cell::setStateActive, currentCell, currentCell + std::stoi(multiplier));
+			mCM.travelCellMatrix(&Cell::setStateActive, currentCell, currentCell + mult);
 			multiplier = "";
 			break;
 		case 'b':
-			currentCell+=std::stoi(multiplier); 
+			mult = ((multiplier.size() == 0) ? 1 : stoi(multiplier));
+			currentCell+=mult;
 			multiplier = ""; 
 			break;
 		case '$':
-			nextLine(currentCell, std::stoi(multiplier));
+			mult = ((multiplier.size() == 0) ? 1 : stoi(multiplier));
+			nextLine(currentCell, mult);
 			multiplier = "";
-			
+			break;
+		case '\n': 
+		case '\r':
 			break;
 		default:
-			multiplier += c;
+			multiplier += str[i];
 			break;
 		}
 
@@ -149,7 +145,7 @@ void RleUtil::setDimRuleFromString(std::string str)
 	std::cout << "RleUtil::setDimRuleFromString yDim : " << yDim << std::endl;
 	std::cout << "RleUtil::setDimRuleFromString bRule : " << bRule << std::endl;
 	std::cout << "RleUtil::setDimRuleFromString sRule : " << sRule << std::endl;
-	//mRule.setRule(string2IntVect(bRule), string2IntVect(sRule));
+	mRule.setRule(string2IntVect(bRule), string2IntVect(sRule));
 	mCM.setSize(std::stoi(xDim), std::stoi(yDim));
 }
 
@@ -158,4 +154,4 @@ void RleUtil::setDimRuleFromString(std::string str)
 
 Rule RleUtil::rule()				{ return mRule; }
 
-CellMatrix RleUtil::cellmatrix()	{ return mCM; }
+CellMatrix & RleUtil::cellmatrix()	{ return mCM; }

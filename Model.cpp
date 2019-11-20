@@ -2,27 +2,14 @@
 
 
 
-Model::Model()
-{
-}
+// constructor
+Model::Model() : mGoL{ 0, 0 } { mCM.setSize(0, 0); mRule.setRule({}, {}); }
 
 
-Model::~Model()
-{
-}
+void Model::setCellMatrix(int x, int y) { mCM.setSize(x, y); }
+void Model::update() {}
+void Model::nextrule() {}
+void Model::reinitialise() {}
+CellMatrix & Model::cellmatrix() { return mCM; }
+GameOfLife & Model::gol() { return mGoL; }
 
-//
-//class Model
-//{
-//private:
-//	CellMatrix cm;
-//	//Rule rule;
-//
-//public:
-//	Model();
-//	~Model();
-//	void setCellMatrix(int, int);
-//	void update();
-//	void nextrule();
-//	void reinitialise();
-//};

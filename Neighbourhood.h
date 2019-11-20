@@ -2,7 +2,7 @@
 // Teacher		:	Jean-Christophe Demers
 // Contents		:	Neighbourhood Class
 // Description	:	
-// Autrice		:	Andrea Cohen
+// Author		:	Andrea Cohen
 // Date			:	2019-11-16
 // Comments		:	
 
@@ -27,13 +27,12 @@ private:
 	
 public:
 	Neighbourhood(CellMatrix);
-
-	~Neighbourhood();
-
 	//getters
 	int sum();
 	Cell::cellstate state();
-	void it(itCM);
+	// setters
+	void setIt(const itCM &);
+	void setCellMatrix(const CellMatrix &);
 };
 
 #endif // !_NEIGHBOURHOOD_H_

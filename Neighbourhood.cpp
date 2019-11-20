@@ -38,7 +38,8 @@ itCM Neighbourhood::right(itCM it)
 }
 
 //setter
-void Neighbourhood::it(itCM it) { mIt = it; }
+void Neighbourhood::setIt(const itCM & it)						{ mIt = it; }
+void Neighbourhood::setCellMatrix(const CellMatrix & cm)		{ mCM = cm; }
 
 
 // getters
@@ -48,4 +49,4 @@ int Neighbourhood::sum()
 	return (*up(left(mIt))).state() + (*up(mIt)).state() + (*up(right(mIt))).state() + (*left(mIt)).state() + (*right(mIt)).state() + (*down(left(mIt))).state() + (*down(mIt)).state() + (*down(right(mIt))).state();
 }
 
-Cell::cellstate Neighbourhood::state() { return (*mIt).state(); }
+Cell::cellstate  Neighbourhood::state() { return (*mIt).state(); }
