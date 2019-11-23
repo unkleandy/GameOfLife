@@ -17,4 +17,7 @@ class View
 
 };
 
+//void changeBgColor();
+//void changeChColor();
+
 #endif // !_VIEW_H_
