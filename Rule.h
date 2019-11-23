@@ -2,7 +2,7 @@
 // Teacher		:	Jean-Christophe Demers
 // Contents		:	Rule Class
 // Description	:	
-// Autrice		:	Elisha Buhendwa
+// Authors		:	Andrea Cohen & Elisha Buhendwa
 // Date			:	2019-11-16
 // Comments		:	
 
@@ -11,6 +11,7 @@
 #ifndef _RULE_H_
 #define _RULE_H_
 #include <vector>
+#include "Cell.h"
 
 class Rule
 {

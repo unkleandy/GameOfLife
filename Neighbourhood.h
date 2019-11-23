@@ -15,8 +15,11 @@
 class Neighbourhood
 {
 private:
-	CellMatrix mCM;
-	itCM mIt;
+	
+	CellMatrix * mCM;
+	itCM * mIt;
+	
+
 
 	itCM up(itCM it);
 	itCM down(itCM it);
@@ -26,13 +29,13 @@ private:
 
 	
 public:
-	Neighbourhood(CellMatrix);
+	Neighbourhood(CellMatrix * mCM, itCM * mIt);
 	//getters
 	int sum();
 	Cell::cellstate state();
 	// setters
-	void setIt(const itCM &);
-	void setCellMatrix(const CellMatrix &);
+	void setIt(itCM * mIt);
+	void setCellMatrix(CellMatrix * mCM);
 };
 
 #endif // !_NEIGHBOURHOOD_H_

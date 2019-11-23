@@ -4,7 +4,7 @@
 // Description	:	Enables the translation of an RLE file to a CellMatrix and Rule
 // Autrice		:	Andrea Cohen
 // Date			:	2019-11-16
-// Comments		:	algo setMatrixFromString() fortement inspire de l'aide de Jacob Lamontagne
+// Comments		:	
 
 
 #pragma once

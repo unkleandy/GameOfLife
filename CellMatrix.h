@@ -17,6 +17,8 @@
 
 
 using itCM = std::vector<Cell>::iterator;
+using citCM = std::vector<Cell>::const_iterator;
+
 
 class CellMatrix {
 private:

@@ -26,6 +26,7 @@ public:
 	Controller(Model &, View &);
 	~Controller();
 	void run();
+	void initaliseConsoleContext();
 };
 
 #endif // !_CONTROLLER_H_

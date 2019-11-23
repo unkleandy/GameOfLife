@@ -3,9 +3,8 @@
 #include <vector>
 #include <iostream>
 
-Rule::Rule()
-	: mBorn{}, mSurvive{}
-{}
+// empty constructor
+Rule::Rule()	: mBorn{ defineRule({3}) }, mSurvive{ defineRule({2,3}) } {}
 
 
 void Rule::setRule(std::vector<int> b, std::vector<int> s)

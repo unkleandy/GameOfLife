@@ -1,7 +1,15 @@
 #include "GameOfLife.h"
 
 
-GameOfLife::GameOfLife(int x, int y)	:mCurrentCM{x, y}, mEvolvedCM{x, y}, mHood {mCurrentCM}	{}
+GameOfLife::GameOfLife(int x, int y)
+	:
+	mCM0{ x, y },
+	mCM1{ x, y },
+	mHood{ &mCM0, &itCM{mCM0.matrix().begin()} },
+	mCurrentCM { &mCM0 },
+	mEvolvedCM { &mCM1 },
+	count{}
+{}
 
 Cell::cellstate GameOfLife::newCellState()
 {
@@ -13,12 +21,12 @@ Cell::cellstate GameOfLife::applyRule(int rule, int sum) { return (Cell::cellsta
 
 void GameOfLife::importAndCenterCellmatrix(CellMatrix rleCM)
 {
-	mCurrentCM.initializeMatrix0();
-	int xSurplus { mCurrentCM.x() - rleCM.x() };
-	int yBegin { (mCurrentCM.y() - rleCM.y()) / 2 };
+	mCurrentCM->initializeMatrix0();
+	int xSurplus { mCurrentCM->x() - rleCM.x() };
+	int yBegin { (mCurrentCM->y() - rleCM.y()) / 2 };
 
 	//sets the iterator at the beginning position to center the imported CellMatrix
-	itCM itGoL{ (mCurrentCM.matrix().begin() + yBegin * mCurrentCM.x() + (int) xSurplus/2) };
+	itCM itGoL{ (mCurrentCM->matrix().begin() + yBegin * mCurrentCM->x() + (int) xSurplus/2) };
 	itCM itRLE{ rleCM.matrix().begin() };
 	for (int j{}; j < rleCM.y(); ++j)
 	{
@@ -29,24 +37,32 @@ void GameOfLife::importAndCenterCellmatrix(CellMatrix rleCM)
 			++itGoL;
 			++itRLE;
 		}
-		// skips to the next line in the larger matrix
+		// skips to the next line at the proper offset in the larger matrix
 		itGoL += xSurplus;
 	}
+
 }
 
 void GameOfLife::evolveMatrix()
 {
-	itCM currentCell { mCurrentCM.matrix().begin() };
-	itCM evolvedCell { mEvolvedCM.matrix().begin() };
+	itCM currentCell { mCurrentCM->matrix().begin() };
+	itCM evolvedCell { mEvolvedCM->matrix().begin() };
 
-	while (currentCell != mCurrentCM.matrix().end())
+	mHood.setCellMatrix(mCurrentCM);
+	mHood.setIt(&currentCell);
+
+	while (currentCell != mCurrentCM->matrix().end())
 	{
-		mHood.setIt(currentCell);
 		(*evolvedCell).setState(newCellState());
 		++currentCell;
 		++evolvedCell;
 	}
+
+	mTempCM = mCurrentCM;
+	mCurrentCM = mEvolvedCM;
+	mEvolvedCM = mTempCM;
 }
 
-CellMatrix & GameOfLife::cellmatrix() { return  mCurrentCM; }
+
+CellMatrix & GameOfLife::cellmatrix() { return  (*mCurrentCM); }
 

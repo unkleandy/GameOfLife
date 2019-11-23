@@ -20,8 +20,14 @@
 
 class GameOfLife
 {
-	CellMatrix mCurrentCM;
-	CellMatrix mEvolvedCM;
+private:
+	CellMatrix* mC;
+	int count;
+	CellMatrix mCM0;
+	CellMatrix mCM1;
+	CellMatrix * mCurrentCM;
+	CellMatrix * mEvolvedCM;
+	CellMatrix * mTempCM;
 	Rule mRule;
 	Neighbourhood mHood;
 public:
@@ -31,7 +37,6 @@ public:
 	void importAndCenterCellmatrix(CellMatrix rleCM);
 	void evolveMatrix();
 	CellMatrix & cellmatrix();
-
 };
 
 #endif // !_GAMEOFLIFE_H_

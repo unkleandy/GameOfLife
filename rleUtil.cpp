@@ -5,6 +5,7 @@
 #include <string>		// for std::string and stoi
 #include <iostream>		// for testing
 #include <cassert>		// for assert
+#include <filesystem>
 
 // headers
 #include "rleUtil.h"
@@ -20,42 +21,44 @@
 //	return 0;
 //}
 
-#
+
 RleUtil::RleUtil() :mCM{} {}
 
 RleUtil::RleUtil(std::string path)
 {
 //TODO open fstream
 
-	std::fstream fstream(path, std::ios::in);
-
-	std::regex reComment("#[NnCcOcRr].*");
-	std::regex reDimRule("[Xx] *= *[[:digit:]][[:digit:]]*, *[Yy] *= *[[:digit:]][[:digit:]]* *, *[Rr]ule *= *[Bb]?[[:digit:]][[:digit:]]*\\/[Ss]?[[:digit:]][[:digit:]]*");
-	std::regex reLastLine("[ob$\\d]*!.*");
-
-	std::string line{};
-	std::string dimRuleInfo{};
-	std::string matrixInfo{};
-	bool info{};
-	bool lastline{};
-
-	while (getline(fstream, line))
+	std::ifstream file(path);
+	if (file.is_open())
 	{
-		if (line.length() == 0) {}
-		else if (std::regex_match(line, reComment)) {}
-		else if (std::regex_match(line, reDimRule)) { dimRuleInfo = line; bool info = true; }
-		else if (info==true && lastline==false) { matrixInfo += line; }
-		if (std::regex_match(line, reLastLine)) { lastline = true; }
+		std::regex reComment("#[NnCcOcRr].*");
+		std::regex reDimRule("[Xx] *= *[[:digit:]][[:digit:]]*, *[Yy].*");
+		std::regex reLastLine("[ob\\$\\d]*!.*");
+
+		std::string line{};
+		std::string dimRuleInfo{};
+		std::string matrixInfo{};
+		bool info{};
+		bool lastline{};
+
+		while (getline(file, line))
+		{
+			if (line.length() == 0) {}
+			else if (std::regex_match(line, reComment)) { std::cout << "RleUtil::RleUtil commentaire  : " + line << std::endl; }
+			else if (std::regex_match(line, reDimRule)) { dimRuleInfo = line; bool info = true;   std::cout << "RleUtil::RleUtil dim et regle  : " + dimRuleInfo << std::endl; }
+			else if (std::regex_match(line, reLastLine)) { lastline = true;  matrixInfo += line; std::cout<<"RleUtil::RleUtil last line  : " + matrixInfo << std::endl;}
+			else if (info == true && lastline == false) { matrixInfo += line; std::cout << "RleUtil::RleUtil matrice  : " + matrixInfo << std::endl; }
+		}
+
+		// testing
+		std::cout << "RleUtil::RleUtil dimRuleInfo : " << dimRuleInfo << std::endl;
+		std::cout << "RleUtil::RleUtil matrixInfo : " << matrixInfo << std::endl;
+
+		setDimRuleFromString(dimRuleInfo);
+		setMatrixFromString(matrixInfo);
+
+		//TODO close fstream
 	}
-
-// testing
-	std::cout << "RleUtil::RleUtil dimRuleInfo : "<< dimRuleInfo << std::endl;
-	std::cout << "RleUtil::RleUtil matrixInfo : " << matrixInfo << std::endl;
-
-	setDimRuleFromString(dimRuleInfo);
-	setMatrixFromString(matrixInfo);
-
-//TODO close fstream
 }
 
 
@@ -145,6 +148,7 @@ void RleUtil::setDimRuleFromString(std::string str)
 //	std::cout << "RleUtil::setDimRuleFromString yDim : " << yDim << std::endl;
 //	std::cout << "RleUtil::setDimRuleFromString bRule : " << bRule << std::endl;
 //	std::cout << "RleUtil::setDimRuleFromString sRule : " << sRule << std::endl;
+
 	mRule.setRule(string2IntVect(bRule), string2IntVect(sRule));
 	mCM.setSize(std::stoi(xDim), std::stoi(yDim));
 }
