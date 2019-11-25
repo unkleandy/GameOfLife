@@ -27,6 +27,7 @@ Controller::Controller(Model & m, View & v)
 	mModelAction(),
 	mReader{ Console::getInstance().keyReader() }
 {
+	keybinding();
 }
 
 
@@ -57,8 +58,8 @@ void Controller::run()
 		
 		mView.showCurrent(mModel.cellmatrix());
 		mModel.gol().evolveMatrix();
-		std::this_thread::sleep_for(std::chrono::milliseconds(mSpeed));
-
+		//std::this_thread::sleep_for(std::chrono::milliseconds(mSpeed));
+		Console::getInstance().keyReader().read(events);
 		if (events.size() != 0) 
 		{
 			mModelAction.doActionFromKey(events.front().keyA(), mModel, *this, mView);

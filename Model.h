@@ -15,18 +15,20 @@
 #include "Rule.h"
 #include "GameOfLife.h"
 
+#include <string>
+
 
 class Model
 {
 private:
-	CellMatrix mCM;
 	Rule mRule;
 	GameOfLife mGoL;
-	std::vector<Rule> rules;
+	std::vector<Rule> mRules;
+	std::vector<std::string>mRles;
 
 public:
 	Model(int dimX, int dimY);
-	void setCellMatrix(int, int);
+
 	void update();
 	void nextRule();
 	void showRule();

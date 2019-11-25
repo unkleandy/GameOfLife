@@ -4,25 +4,25 @@
 Model::Model( int dimX, int dimY) 
 	: 
 	mGoL{ dimX,dimY },
-	rules{	{std::vector<int>{3},std::vector<int>{2,3}},
+	mRules{	{std::vector<int>{3},std::vector<int>{2,3}},
 			{std::vector<int>{1,3},std::vector<int>{2,3}},
 			{std::vector<int>{1,3,5,7},std::vector<int>{1,3,5,7}},
 			{std::vector<int>{3,6},std::vector<int>{2,3}}
-	}
+	},
+	mRles{}
 {}
 
 void Model::showRule() { mRule.afficherRule(); }
-void Model::setCellMatrix(int x, int y) { mCM.setSize(x, y); }
 void Model::update() { mGoL.evolveMatrix(); }
 
 void Model::nextRule() 
 {
-	static std::vector<Rule>::iterator it{ rules.begin() };
+	static std::vector<Rule>::iterator it{ mRules.begin() };
 
-	if (it == rules.end() - 1)
+	if (it == mRules.end() - 1)
 	{
 		mRule = *it;
-		it = rules.begin();
+		it = mRules.begin();
 	}
 	else 
 	{
