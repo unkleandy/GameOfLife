@@ -22,7 +22,6 @@ class GameOfLife
 {
 private:
 	CellMatrix* mC;
-	int count;
 	CellMatrix mCM0;
 	CellMatrix mCM1;
 	CellMatrix * mCurrentCM;

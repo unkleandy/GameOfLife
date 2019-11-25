@@ -22,13 +22,19 @@ private:
 	CellMatrix mCM;
 	Rule mRule;
 	GameOfLife mGoL;
+	std::vector<Rule> rules;
 
 public:
-	Model();
+	Model(int dimX, int dimY);
 	void setCellMatrix(int, int);
 	void update();
-	void nextrule();
+	void nextRule();
+	void showRule();
 	void reinitialise();
+	void randomiseMatrix(double percentage);
+	void nextRle();
+	void sameRle();
+	void prevRle();
 	CellMatrix & cellmatrix();
 	GameOfLife & gol();
 	

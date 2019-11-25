@@ -11,13 +11,30 @@
 #ifndef _VIEW_H_
 #define _VIEW_H_
 
+#include <iterator>
+
+#include "./Console/Console.h"
+#include "./Console/ConsoleColor.h"
+#include "CellMatrix.h"
+
 
 class View 
 {
-
+private:
+	ConsoleWriter & mWriter;
+	std::vector< ConsoleColor::Text> mTextColors;
+	std::vector< ConsoleColor::Background> mBackgroundColors;
+	std::vector< ConsoleColor::Text>::iterator mTextColorIt;
+	std::vector< ConsoleColor::Background>::iterator mBackgroundColorIt;
+	ConsoleColor::Text mCurrentTextColor;
+	ConsoleColor::Background mCurrentBackgroundColor;
+	
+public:
+	View();
+	void showCurrent(CellMatrix & currentCellMatrix);
+	void toggleBackgroundColor();
+	void changeTextColor();
 };
 
-//void changeBgColor();
-//void changeChColor();
 
 #endif // !_VIEW_H_

@@ -10,7 +10,7 @@
 #pragma once
 #ifndef _RULE_H_
 #define _RULE_H_
-#include <vector>
+#include <vector>	// for vector
 #include "Cell.h"
 
 class Rule
@@ -21,6 +21,7 @@ private:
 
 public:
 	Rule();
+	Rule(std::vector<int> born, std::vector<int> survive);
 	// Modificateurs
 	void setRule(std::vector<int> b, std::vector<int> s);
 	int defineRule(std::vector<int> r);

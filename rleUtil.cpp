@@ -33,6 +33,7 @@ RleUtil::RleUtil(std::string path)
 	{
 		std::regex reComment("#[NnCcOcRr].*");
 		std::regex reDimRule("[Xx] *= *[[:digit:]][[:digit:]]*, *[Yy].*");
+		std::regex reMatrixLine("[ob\\$\\d]*.*");
 		std::regex reLastLine("[ob\\$\\d]*!.*");
 
 		std::string line{};
@@ -47,7 +48,7 @@ RleUtil::RleUtil(std::string path)
 			else if (std::regex_match(line, reComment)) { std::cout << "RleUtil::RleUtil commentaire  : " + line << std::endl; }
 			else if (std::regex_match(line, reDimRule)) { dimRuleInfo = line; bool info = true;   std::cout << "RleUtil::RleUtil dim et regle  : " + dimRuleInfo << std::endl; }
 			else if (std::regex_match(line, reLastLine)) { lastline = true;  matrixInfo += line; std::cout<<"RleUtil::RleUtil last line  : " + matrixInfo << std::endl;}
-			else if (info == true && lastline == false) { matrixInfo += line; std::cout << "RleUtil::RleUtil matrice  : " + matrixInfo << std::endl; }
+			else if (std::regex_match(line, reMatrixLine)) { matrixInfo += line; std::cout << "RleUtil::RleUtil matrice  : " + matrixInfo << std::endl; }
 		}
 
 		// testing

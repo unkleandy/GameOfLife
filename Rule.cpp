@@ -6,6 +6,8 @@
 // empty constructor
 Rule::Rule()	: mBorn{ defineRule({3}) }, mSurvive{ defineRule({2,3}) } {}
 
+Rule::Rule(std::vector<int> born, std::vector<int> survive) { setRule(born, survive); }
+
 
 void Rule::setRule(std::vector<int> b, std::vector<int> s)
 {
@@ -67,8 +69,9 @@ void Rule::afficherRule()
 {
 	std::cout << "B";
 	afficher(mBorn);
-	std::cout << "S";
+	std::cout << " S";
 	afficher(mSurvive);
+	std::cout << std::endl;
 }
 
 

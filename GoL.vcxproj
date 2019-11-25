@@ -134,8 +134,10 @@
     <ClCompile Include="Console\ConsoleKeyReader.cpp" />
     <ClCompile Include="Console\ConsolePixel.cpp" />
     <ClCompile Include="Console\ConsoleWriter.cpp" />
-    <ClCompile Include="Controler.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="EcaActionKeyBinding.cpp" />
     <ClCompile Include="GameOfLife.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Neighbourhood.cpp" />
     <ClCompile Include="rleUtil.cpp" />
@@ -158,29 +160,15 @@
     <ClInclude Include="Console\ConsoleKeyReader.h" />
     <ClInclude Include="Console\ConsolePixel.h" />
     <ClInclude Include="Console\ConsoleWriter.h" />
-    <ClInclude Include="Controler.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="EcaActionKeyBinding.h" />
     <ClInclude Include="GameOfLife.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Neighbourhood.h" />
     <ClInclude Include="rleUtil.h" />
     <ClInclude Include="Rule.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="fichiers_test_rle\validation_invalid_header_1.rle" />
-    <None Include="fichiers_test_rle\validation_invalid_header_2.rle" />
-    <None Include="fichiers_test_rle\validation_invalid_header_exceed_height.rle" />
-    <None Include="fichiers_test_rle\validation_invalid_header_exceed_width.rle" />
-    <None Include="fichiers_test_rle\validation_invalid_invalid_size_1.rle" />
-    <None Include="fichiers_test_rle\validation_invalid_invalid_size_2.rle" />
-    <None Include="fichiers_test_rle\validation_invalid_missing_end_of_sequence_char.rle" />
-    <None Include="fichiers_test_rle\validation_invalid_size_0.rle" />
-    <None Include="fichiers_test_rle\validation_invalid_size_no_size.rle" />
-    <None Include="fichiers_test_rle\validation_valid_but_too_big_otcametapixel.rle" />
-    <None Include="fichiers_test_rle\validation_valid_no_rule.rle" />
-    <None Include="fichiers_test_rle\validation_valid_with_000_header.rle" />
-    <None Include="fichiers_test_rle\validation_valid_with_100_header.rle" />
-    <None Include="fichiers_test_rle\validation_valid_with_comments_at_the_end.rle" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

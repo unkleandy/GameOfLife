@@ -8,8 +8,8 @@ GameOfLife::GameOfLife(int x, int y)
 	mHood{ &mCM0, &itCM{mCM0.matrix().begin()} },
 	mCurrentCM { &mCM0 },
 	mEvolvedCM { &mCM1 },
-	count{}
-{}
+	mRule{ std::vector<int>{3}, std::vector<int>{2,3} }
+{ mRule.setRule(std::vector<int>{3}, std::vector<int>{2,3}); }
 
 Cell::cellstate GameOfLife::newCellState()
 {
@@ -24,7 +24,7 @@ void GameOfLife::importAndCenterCellmatrix(CellMatrix rleCM)
 	mCurrentCM->initializeMatrix0();
 	int xSurplus { mCurrentCM->x() - rleCM.x() };
 	int yBegin { (mCurrentCM->y() - rleCM.y()) / 2 };
-
+	
 	//sets the iterator at the beginning position to center the imported CellMatrix
 	itCM itGoL{ (mCurrentCM->matrix().begin() + yBegin * mCurrentCM->x() + (int) xSurplus/2) };
 	itCM itRLE{ rleCM.matrix().begin() };

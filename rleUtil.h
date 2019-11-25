@@ -1,7 +1,7 @@
 // Context		:	A2019 420-B52 Travail-Pratique 1
 // Teacher		:	Jean-Christophe Demers
 // Contents		:	RleUtil Class
-// Description	:	Enables the translation of an RLE file to a CellMatrix and Rule
+// Description	:	Enables the translation of an RLE file to a Matrix and Rule
 // Autrice		:	Andrea Cohen
 // Date			:	2019-11-16
 // Comments		:	
