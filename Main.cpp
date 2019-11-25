@@ -15,7 +15,7 @@
 
 void initaliseConsoleContext(int dimX, int dimY)
 {
-	ConsoleContext context(100, 100, "Game Of Life", 5, L"Consolas");
+	ConsoleContext context(dimX, dimY, "Game Of Life", 5, L"Consolas");
 	Console::defineContext(context);
 }
 

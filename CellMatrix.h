@@ -2,7 +2,7 @@
 // Teacher		:	Jean-Christophe Demers
 // Contents		:	CellMatrix Class
 // Description	:	
-// Author		:	Andrea Cohen
+// Author		:	Andrea Cohen, Elisha Cito Buhendwa
 // Date			:	2019-11-16
 // Comments		:	
 

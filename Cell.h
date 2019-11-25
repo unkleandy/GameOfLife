@@ -36,7 +36,6 @@ public:
 
 	void setState(cellstate cs);
 	void setStateActive();
-	void invert();
 	void show();
 	void randomize(double probability);
 };

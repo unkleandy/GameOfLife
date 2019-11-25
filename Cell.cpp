@@ -22,13 +22,7 @@ void Cell::setStateActive()			{ mState = active; }
 
 void Cell::show()					{ std::cout<< (mState ? cellActive : cellInactive); }
 
-//void Cell::invert()					{ mState = (cellstate)!state; }
 
-//////////////////////////////////////////////////////////////////////////
-	//! \brief Mutateur aléatoire.
-	//!
-	//! \param probability la probabilité d'avoir un état actif
-	//////////////////////////////////////////////////////////////////////////
 void Cell::randomize(double probability) { mState = (cellstate)RandomUtil::generateEvent(probability); }
 
 

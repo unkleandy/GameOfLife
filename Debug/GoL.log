@@ -1,1 +1,5 @@
-﻿  GoL.vcxproj -> Y:\B-52-Dev\GoL\Debug\GoL.exe
+﻿  Cell.cpp
+  Rule.cpp
+y:\b-52-dev\gol\gol\rule.cpp(21): warning C4018: '<' : incompatibilité signed/unsigned
+  Génération de code en cours...
+  GoL.vcxproj -> Y:\B-52-Dev\GoL\Debug\GoL.exe

@@ -14,6 +14,8 @@
 #include "./Console/ConsoleContext.h"
 
 #include "./Console/ConsoleKeyReader.h"
+#include "./Console/ConsoleKeyFilterDown.h"
+#include "./Console/ConsoleKeyFilterModifiers.h"
 
 
 
@@ -41,20 +43,19 @@ void Controller::run()
 	std::string path{"./fichiers_test_rle/snarkcatalystvariants.rle"};
 	RleUtil rle(path);
 	
-	//mReader.installFilter(new ConsoleKeyFilterDown);
-	//mReader.installFilter(new ConsoleKeyFilterModifiers);
+	mReader.installFilter(new ConsoleKeyFilterDown);
+	mReader.installFilter(new ConsoleKeyFilterModifiers);
 
 	
 	ConsoleKeyReader::KeyEvents events;
 
 	mModel.gol().importAndCenterCellmatrix(rle.cellmatrix());
-	mModel.gol().cellmatrix().show();
-	_getch();
+	
 	while (!mQuit) 
 	{
-		system("cls");
-		mModel.showRule();
-		mModel.gol().cellmatrix().show();
+		//system("cls");
+		
+		mView.showCurrent(mModel.cellmatrix());
 		mModel.gol().evolveMatrix();
 		std::this_thread::sleep_for(std::chrono::milliseconds(mSpeed));
 
@@ -66,11 +67,7 @@ void Controller::run()
 }
 
 
-void Controller::initaliseConsoleContext()
-{
-	ConsoleContext context(100, 100, "Game Of Life", 5, L"Consolas");
-	Console::defineContext(context);
-}
+
 
 void Controller::quit() { mQuit = true; }
 void Controller::changeSpeed(unsigned int timesFaster) { mSpeed = (int) (500 / timesFaster); }
@@ -79,7 +76,6 @@ void Controller::changeSpeed(unsigned int timesFaster) { mSpeed = (int) (500 / t
 
 void Controller::keybinding()
 {
-
 	mModelAction.setAction((int)KeyBinding::Action_Quit, [](Model & model, Controller & controller, View & view)-> void { controller.quit(); });
 
 	mModelAction.setAction((int)KeyBinding::Controler_Speed1, [](Model & model, Controller & controller, View & view)-> void { controller.changeSpeed(1); });
@@ -94,8 +90,8 @@ void Controller::keybinding()
 
 	mModelAction.setAction((int)KeyBinding::Model_NextRule, [](Model & model, Controller & controller, View & view)-> void { model.nextRule(); });
 
-	//mModelAction.setAction((int)KeyBinding::Console_SwitchColor, [](Model & model, Controller & controller, View & view)-> void { view.changeChColor()(); });
-	//mModelAction.setAction((int)KeyBinding::Console_SwitchColor, [](Model & model, Controller & controller, View & view)-> void { view.changeBgColor()(); });
+	mModelAction.setAction((int)KeyBinding::Console_SwitchColor, [](Model & model, Controller & controller, View & view)-> void { view.changeTextColor(); });
+	mModelAction.setAction((int)KeyBinding::Console_SwitchColor, [](Model & model, Controller & controller, View & view)-> void { view.toggleBackgroundColor(); });
 
 	mModelAction.setAction((int)KeyBinding::Model_Random01, [](Model & model, Controller & controller, View & view)-> void { model.randomiseMatrix(0.01); });
 	mModelAction.setAction((int)KeyBinding::Model_Random05, [](Model & model, Controller & controller, View & view)-> void { model.randomiseMatrix(0.05); });

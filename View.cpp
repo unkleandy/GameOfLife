@@ -22,41 +22,41 @@ View::View()
 				ConsoleColor::Background::Black
 	},
 	mTextColorIt{ mTextColors.begin() },
-	mCurrentTextColor{0},
+	mCurrentTextColor{ * mTextColors.begin() },
 	mCurrentBackgroundColor{ ConsoleColor::Background::Black }
-{}
+{
+	mWriter.createImage("output") ; 
+	
+}
 
 
 void View::showCurrent(CellMatrix & currentCellMatrix) 
 {
-
-	ConsoleImage & matrixImage{ Console::getInstance().writer().image("output") };
-	
+	mWriter.image("output").fill(cellInactive, mCurrentBackgroundColor);
 	char c;
 	itCM currentCell{ currentCellMatrix.matrix().begin() };
 	for (int posY{}; posY < currentCellMatrix.y(); ++posY)
 	{
 		for (int posX{ 0 }; posX < currentCellMatrix.x(); ++posX)
 		{
-			c = (*currentCell).state() ? Cell::active : Cell::inactive;
-			matrixImage.drawPoint(posX, posY, ((*currentCell).state() ? Cell::active : Cell::inactive), mCurrentTextColor);
+			c = (*currentCell).state() ? cellActive : cellInactive;
+			mWriter.image("output").drawPoint(posX, posY, c, mCurrentTextColor);
 			++currentCell;
 		}
-		
 	}
+	mWriter.write(mWriter.image("output"));
 }
 
-void changeTextColor() 
+void View::changeTextColor()
 {
-	////if(mCurrentTextColor<ConsoleColor::Opaque count)
-	////	https://stackoverflow.com/questions/14989274/is-it-possible-to-determine-the-number-of-elements-of-a-c-enum-class
-	//++mTextColorIt;
-	//mCurrentTextColor = *mTextColorIt;
+
+	++mTextColorIt;
+	mCurrentTextColor = *mTextColorIt;
 }
 
-void toggleBackgroundColor()
+void View::toggleBackgroundColor()
 {
-	//if (mCurrentBackgroundColor != ConsoleColor::Background::Black)
+	//if (mCurrentBackgroundColor == ConsoleColor::Background::Black)
 	//{
 	////	{ mCurrentBackgroundColor = (ConsoleColor::Background) mCurrentTextColor; }
 	//	{ mCurrentBackgroundColor = *(mBackgroundColors.begin() + (std::distance(mTextColors.begin(), mTextColorIt)); }
