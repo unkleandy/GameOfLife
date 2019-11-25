@@ -34,5 +34,5 @@ void Model::nextRule()
 void Model::randomiseMatrix(double precentage) {}
 
 void Model::reinitialise() {}
-CellMatrix & Model::cellmatrix() { return mCM; }
+CellMatrix & Model::cellmatrix() { return mGoL.cellmatrix(); }
 GameOfLife & Model::gol() { return mGoL; }

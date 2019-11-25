@@ -76,7 +76,6 @@ void Controller::changeSpeed(unsigned int timesFaster) { mSpeed = (int) (500 / t
 
 void Controller::keybinding()
 {
-
 	mModelAction.setAction((int)KeyBinding::Action_Quit, [](Model & model, Controller & controller, View & view)-> void { controller.quit(); });
 
 	mModelAction.setAction((int)KeyBinding::Controler_Speed1, [](Model & model, Controller & controller, View & view)-> void { controller.changeSpeed(1); });
