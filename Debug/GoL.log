@@ -1,2 +1,3 @@
 ﻿  Controller.cpp
+LINK : warning LNK4076: invalid incremental status file 'Z:\C++\GoL\Debug\GoL.ilk' (which will be deleted); linking nonincrementally
   GoL.vcxproj -> Z:\C++\GoL\Debug\GoL.exe

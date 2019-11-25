@@ -12,10 +12,9 @@
 
 #include "./Console/Console.h"
 #include "./Console/ConsoleContext.h"
-#include "./Console/ConsoleColor.h"
+
 #include "./Console/ConsoleKeyReader.h"
-#include "./Console/ConsoleKeyFilterDown.h"
-#include "./Console/ConsoleKeyFilterModifiers.h"
+
 
 
 // constructor
@@ -23,11 +22,9 @@ Controller::Controller(Model & m, View & v)
 	:
 	mModel{ m }, 
 	mView{ v }, 
-	mModelAction()
-	mWriter{ Console::getInstance().writer() }
+	mModelAction(),
+	mReader{ Console::getInstance().keyReader() }
 {
-	keybinding();
-	initaliseConsoleContext();
 }
 
 
@@ -44,11 +41,10 @@ void Controller::run()
 	std::string path{"./fichiers_test_rle/snarkcatalystvariants.rle"};
 	RleUtil rle(path);
 	
+	//mReader.installFilter(new ConsoleKeyFilterDown);
+	//mReader.installFilter(new ConsoleKeyFilterModifiers);
 
-	ConsoleWriter & writer{ Console::getInstance().writer() };
-	ConsoleKeyReader & reader{ Console::getInstance().keyReader() };
-	reader.installFilter(new ConsoleKeyFilterDown);
-	reader.installFilter(new ConsoleKeyFilterModifiers);
+	
 	ConsoleKeyReader::KeyEvents events;
 
 	mModel.gol().importAndCenterCellmatrix(rle.cellmatrix());

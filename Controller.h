@@ -24,7 +24,7 @@ private:
 	bool mQuit{ false };
 	int mSpeed{ 500 };
 	ConsoleKeyReader & mReader;
-	ConsoleWriter & mWriter;
+	
 
 public:
 	Controller(Model & model, View & view);

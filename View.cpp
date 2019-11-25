@@ -27,23 +27,39 @@ View::View()
 {}
 
 
-void View::showCurrent(CellMatrix & currentCellMatrix) {}
-
-void toggleBackgroundColor()
+void View::showCurrent(CellMatrix & currentCellMatrix) 
 {
-	if (mCurrentBackgroundColor != ConsoleColor::Background::Black)
-	{
-	//	{ mCurrentBackgroundColor = (ConsoleColor::Background) mCurrentTextColor; }
-		{ mCurrentBackgroundColor = *(mBackgroundColors.begin() + (std::distance(mTextColors.begin(), mTextColorIt)); }
-	}
-	else { mCurrentBackgroundColor = ConsoleColor::Background::Black; }
-}
 
+	ConsoleImage & matrixImage{ Console::getInstance().writer().image("output") };
+	
+	char c;
+	itCM currentCell{ currentCellMatrix.matrix().begin() };
+	for (int posY{}; posY < currentCellMatrix.y(); ++posY)
+	{
+		for (int posX{ 0 }; posX < currentCellMatrix.x(); ++posX)
+		{
+			c = (*currentCell).state() ? Cell::active : Cell::inactive;
+			matrixImage.drawPoint(posX, posY, ((*currentCell).state() ? Cell::active : Cell::inactive), mCurrentTextColor);
+			++currentCell;
+		}
+		
+	}
+}
 
 void changeTextColor() 
 {
-	//if(mCurrentTextColor<ConsoleColor::Opaque count)
-	//	https://stackoverflow.com/questions/14989274/is-it-possible-to-determine-the-number-of-elements-of-a-c-enum-class
-	++mTextColorIt;
-	mCurrentTextColor = *mTextColorIt;
+	////if(mCurrentTextColor<ConsoleColor::Opaque count)
+	////	https://stackoverflow.com/questions/14989274/is-it-possible-to-determine-the-number-of-elements-of-a-c-enum-class
+	//++mTextColorIt;
+	//mCurrentTextColor = *mTextColorIt;
+}
+
+void toggleBackgroundColor()
+{
+	//if (mCurrentBackgroundColor != ConsoleColor::Background::Black)
+	//{
+	////	{ mCurrentBackgroundColor = (ConsoleColor::Background) mCurrentTextColor; }
+	//	{ mCurrentBackgroundColor = *(mBackgroundColors.begin() + (std::distance(mTextColors.begin(), mTextColorIt)); }
+	//}
+	//else { mCurrentBackgroundColor = ConsoleColor::Background::Black; }
 }

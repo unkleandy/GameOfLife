@@ -11,7 +11,7 @@
 #ifndef _CELL_H_ 
 #define _CELL_H_
 
-const char cellActive{ '*' };
+const unsigned char cellActive{ 219 };
 const char cellInactive{ ' ' };
 
 
