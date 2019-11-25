@@ -140,11 +140,13 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Neighbourhood.cpp" />
+    <ClCompile Include="RandomUtil.cpp" />
     <ClCompile Include="rleUtil.cpp" />
     <ClCompile Include="Rule.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ex4_solution\ex1v4\ex1v4\RandomUtil.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="CellMatrix.h" />
     <ClInclude Include="Console\Console.h" />
@@ -164,6 +166,7 @@
     <ClInclude Include="EcaActionKeyBinding.h" />
     <ClInclude Include="GameOfLife.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="RandomUtil.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Neighbourhood.h" />

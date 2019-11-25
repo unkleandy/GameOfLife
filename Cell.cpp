@@ -1,6 +1,8 @@
 #include "Cell.h"
+
 #include <random>					// for Cell::randomize()
 #include <iostream>						// for testing Cell::show()
+
 
 
 Cell::Cell()						:mState{} {}
@@ -22,7 +24,12 @@ void Cell::show()					{ std::cout<< (mState ? cellActive : cellInactive); }
 
 //void Cell::invert()					{ mState = (cellstate)!state; }
 
-void Cell::randomize()				{ mState = (cellstate)(rand() & 1); }
+//////////////////////////////////////////////////////////////////////////
+	//! \brief Mutateur aléatoire.
+	//!
+	//! \param probability la probabilité d'avoir un état actif
+	//////////////////////////////////////////////////////////////////////////
+void Cell::randomize(double probability) { mState = (cellstate)RandomUtil::generateEvent(probability); }
 
 
 

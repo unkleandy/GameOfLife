@@ -5,7 +5,7 @@
 // Autrice		:	Andrea Cohen
 // Date			:	2019-11-16
 // Comments		:	
-
+#include "RandomUtil.h"		// required for : RandomUtil::generateEvent 
 
 #pragma once
 #ifndef _CELL_H_ 
@@ -38,7 +38,7 @@ public:
 	void setStateActive();
 	void invert();
 	void show();
-	void randomize();
+	void randomize(double probability);
 };
 
 #endif // !_CELL_H_

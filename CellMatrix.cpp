@@ -28,7 +28,23 @@ void CellMatrix::setSize(int x, int y)
 
 
 // member methods that use travelCellMatrix
-void CellMatrix::randomizeMatrix()	{ travelCellMatrix(&Cell::randomize, mMatrix.begin(), mMatrix.end()); }
+//void CellMatrix::randomizeMatrix()	{ travelCellMatrix(&Cell::randomize, mMatrix.begin(), mMatrix.end()); }
+
+
+void CellMatrix::randomizeMatrix(double pourcentage)				//{ travelCellMatrix(&Cell::show, mMatrix.begin(), mMatrix.end()); }
+{
+	itCM currentCell{ mMatrix.begin() };
+	for (int j{}; j < mDimY; ++j)
+	{
+		for (int i{ 0 }; i < mDimX; ++i)
+		{
+			(*currentCell).randomize(pourcentage);
+			++currentCell;
+		}
+		std::cout << std::endl;
+	}
+}
+
 
 void CellMatrix::show()				//{ travelCellMatrix(&Cell::show, mMatrix.begin(), mMatrix.end()); }
 {

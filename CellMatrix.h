@@ -31,7 +31,7 @@ public:
 	std::vector<Cell> vec() { return mMatrix; }
 	void setSize(int, int);
 	void initializeMatrix0();
-	void randomizeMatrix();
+	void randomizeMatrix(double pourcentage);
 	void travelCellMatrix(void(Cell::*task)(), itCM start, itCM finish);
 	void show();
 	int x();
