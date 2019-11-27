@@ -62,7 +62,7 @@ void CellMatrix::show()				//{ travelCellMatrix(&Cell::show, mMatrix.begin(), mM
 
 void CellMatrix::travelCellMatrix(void(Cell::*task)(), itCM currentCell, itCM finish)
 {
-	assert(finish < mMatrix.end());
+	assert(finish <= mMatrix.end());
 
 	while (currentCell != finish) 
 	{

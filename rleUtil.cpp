@@ -96,7 +96,6 @@ int RleUtil::openFile(std::string path)
 void RleUtil::nextLine(itCM& it, int mult)
 {
 	itCM start{ mCM.matrix().begin() };
-	assert(it + start < mCM.matrix().end());
 	it = start + (ceil(std::distance(start, it) / mCM.x()) + mult)*mCM.x();
 }
 
@@ -119,23 +118,20 @@ int RleUtil::setMatrixFromString(std::string str)
 		{
 		case 'o':
 			mult = ((multiplier.size()==0) ? 1 : stoi(multiplier));
-			if (currentCell + mult > end)
-			{	
-				std::cout << "RleUtil::setMatrixFromString exceeds matrix size" << std::endl;
-				return -1;
-			}
+			if (std::distance(start, end) < std::distance(start, currentCell) + mult) { return-1; }
 			mCM.travelCellMatrix(&Cell::setStateActive, currentCell, currentCell + mult);
 			deadCellsOnly = false;
 			multiplier = "";
 			break;
 		case 'b':
 			mult = ((multiplier.size() == 0) ? 1 : stoi(multiplier));
+			if (std::distance(start, end) < std::distance(start, currentCell) + mult){ return-1; }
 			currentCell+=mult;
 			multiplier = ""; 
 			break;
 		case '$':
 			mult = ((multiplier.size() == 0) ? 1 : stoi(multiplier));
-			if (end >= start + (floor(std::distance(start, currentCell) / mCM.x()) + mult)*mCM.x())
+			if (std::distance(start, end) >= (floor(std::distance(start, currentCell) / mCM.x()) + mult)*mCM.x())
 			{
 				nextLine(currentCell, mult);	
 			}
