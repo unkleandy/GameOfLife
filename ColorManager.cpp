@@ -1,72 +1,41 @@
-#include "ColorManager.h"
+// Context		:	A2019 420-B52 Travail-Pratique 1
+// Teacher		:	Jean-Christophe Demers
+// Contents		:	View Class
+// Description	:	
+// Auteurs		:	Cito Buhendwa
+// Date			:	2019-11-16
+// Comments		:
 
 
 
-ColorManager::ColorManager()
-	: mTextColors{ ConsoleColor::Text::BrightWhite,
-				ConsoleColor::Text::BrightGreen,
-				ConsoleColor::Text::BrightCyan,
-				ConsoleColor::Text::BrightCyan,
-				ConsoleColor::Text::BrightRed,
-	},
-	mBackgroundColors{ ConsoleColor::Background::Black,
-				ConsoleColor::Background::BrightYellow,
-				ConsoleColor::Background::BrightGreen,
-				ConsoleColor::Background::Magenta,
-				ConsoleColor::Background::BrightBlue,
-	},
-	mTextColorIt{ mTextColors.begin() },
-	mBackgroundColorIt{ mBackgroundColors.begin() },
-	mCurrentTextColor{ *mTextColors.begin() },
-	mCurrentBackgroundColor{ *mBackgroundColors.begin() }
+#pragma once
+#include "./Console/ConsoleColor.h"
+#include <thread>			// for timer
+#include <chrono>			// for timer
+
+
+class ColorManager
+
 {
-	
-}
 
+private:
+	int time{1};
+	std::vector< ConsoleColor::Text> mTextColors;
+	std::vector< ConsoleColor::Background> mBackgroundColors;
+	std::vector< ConsoleColor::Text>::iterator mTextColorIt;
+	std::vector< ConsoleColor::Background>::iterator mBackgroundColorIt;
+	ConsoleColor::Text mCurrentTextColor;
+	ConsoleColor::Background mCurrentBackgroundColor;
 
-ColorManager::~ColorManager()
-{
-}
+public:
+	ColorManager();
+	~ColorManager();
+	void changeTextColor();
+	void changeBackgroundColor();
+	void timer();
+	void colorAnimate();
+	ConsoleColor::Text getTextColor();
+	ConsoleColor::Background getBackgroundColor();
 
-void ColorManager::changeTextColor()
-{
-	++mTextColorIt;
-	mCurrentTextColor = *mTextColorIt;
-}
+};
 
-void ColorManager::changeBackgroundColor()
-{
-	++mBackgroundColorIt;
-	mCurrentBackgroundColor = *mBackgroundColorIt;
-}
-
-void ColorManager::timer()
-{
-	while (true) {
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-		++time;
-	}
-}
-
-void ColorManager::colorAnimate()
-{
-	// partir le timer
-	timer();
-
-	// change les couleurs 
-	if (time % 4 == 0) {
-
-		changeTextColor();
-		changeBackgroundColor();
-	}
-}
-
-ConsoleColor::Text ColorManager::getTextColor()
-{
-	return *mTextColors.begin();
-}
-
-ConsoleColor::Background ColorManager::getBackgroundColor()
-{
-	return *mBackgroundColors.begin();
-}
