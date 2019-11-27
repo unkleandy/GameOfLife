@@ -2,7 +2,7 @@
 // Teacher		:	Jean-Christophe Demers
 // Contents		:	View Class
 // Description	:	
-// Autrice		:	
+// Auteurs		:	Andréa Cohem & Cito Buhendwa
 // Date			:	2019-11-16
 // Comments		:	
 
@@ -16,25 +16,27 @@
 #include "./Console/Console.h"
 #include "./Console/ConsoleColor.h"
 #include "CellMatrix.h"
-
+#include "ColorManager.h"
 
 
 class View 
 {
 private:
 	ConsoleWriter & mWriter;
+	ColorManager mColorManager;
 	std::vector< ConsoleColor::Text> mTextColors;
 	std::vector< ConsoleColor::Background> mBackgroundColors;
 	std::vector< ConsoleColor::Text>::iterator mTextColorIt;
 	std::vector< ConsoleColor::Background>::iterator mBackgroundColorIt;
-	ConsoleColor::Text mCurrentTextColor;
-	ConsoleColor::Background mCurrentBackgroundColor;
+	ConsoleColor::Text & mCurrentTextColor;
+	ConsoleColor::Background & mCurrentBackgroundColor;
 	
 public:
 	View();
 	void showCurrent(CellMatrix & currentCellMatrix);
 	void toggleBackgroundColor();
 	void changeTextColor();
+	void headache(CellMatrix & currentCellMatrix);
 };
 
 
