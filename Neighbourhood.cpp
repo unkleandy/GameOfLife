@@ -8,7 +8,6 @@ Neighbourhood::Neighbourhood(CellMatrix * cm, itCM * it)
 
 itCM Neighbourhood::up(itCM it)
 {
-	int i= std::distance(mCM->matrix().begin(), it);
 	it += std::distance(mCM->matrix().begin(), it) < mCM->x() ? (mCM->y() - 1) * mCM->x()  : -(mCM->x());
 	return it;
 }
@@ -17,10 +16,7 @@ itCM Neighbourhood::up(itCM it)
 itCM Neighbourhood::down(itCM it)
 
 {
-	if (std::distance(mCM->matrix().end()- mCM->x(), it) >= 0)
-		it -=  (mCM->y() - 1) * (mCM->x());
-	else
-		it += (mCM->x());
+	it -= (std::distance(mCM->matrix().end()- mCM->x(), it) >= 0)? (mCM->y() - 1) * (mCM->x()) : -(mCM->x());
 
 	//it-= std::distance(mCM->matrix().end(), it) <= mCM->x() ? (mCM->y() - 1) * mCM->x() : -(mCM->x());
 	return it;

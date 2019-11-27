@@ -40,7 +40,6 @@ void GameOfLife::importAndCenterCellmatrix(CellMatrix rleCM)
 		// skips to the next line at the proper offset in the larger matrix
 		itGoL += xSurplus;
 	}
-
 }
 
 void GameOfLife::evolveMatrix()
@@ -65,4 +64,6 @@ void GameOfLife::evolveMatrix()
 
 
 CellMatrix & GameOfLife::cellmatrix() { return  (*mCurrentCM); }
+
+Rule & GameOfLife::rule() { return mRule; }
 

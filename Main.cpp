@@ -21,11 +21,9 @@ void initaliseConsoleContext(int dimX, int dimY)
 
 int main() {
 
-	int dimX{ 150 };
-	int dimY{ 150 };
-	initaliseConsoleContext(dimX, dimY);
+	initaliseConsoleContext(dim, dim);
 	srand(unsigned int(time(nullptr)));
-	Model m(dimX, dimY);
+	Model m(dim, dim);
 	View v;
 	Controller c(m, v);
 

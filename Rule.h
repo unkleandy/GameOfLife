@@ -25,6 +25,7 @@ public:
 	// Modificateurs
 	void setRule(std::vector<int> b, std::vector<int> s);
 	int defineRule(std::vector<int> r);
+	void setRuleTo(Rule rule);
 	// Accesseurs
 	int born();
 	int survive();
@@ -33,6 +34,7 @@ public:
 	void afficherBorn();
 	void afficherSurvive();
 	void afficherRule();
+
 };
 
 #endif // _RULE_H_

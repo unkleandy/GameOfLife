@@ -14,6 +14,7 @@
 #include "CellMatrix.h"
 #include "Rule.h"
 #include "GameOfLife.h"
+#include "RleUtil.h"
 
 #include <string>
 
@@ -23,8 +24,11 @@ class Model
 private:
 	Rule mRule;
 	GameOfLife mGoL;
-	std::vector<Rule> mRules;
-	std::vector<std::string>mRles;
+	std::vector<Rule> mRules; 
+	std::vector<Rule>::iterator mRulesIt;
+	RleUtil mRle;
+	std::vector<std::string> mRLEs;
+	std::vector<std::string>::iterator mRLEsIt;
 
 public:
 	Model(int dimX, int dimY);
@@ -39,6 +43,7 @@ public:
 	void prevRle();
 	CellMatrix & cellmatrix();
 	GameOfLife & gol();
+	void importRle();
 	
 };
 

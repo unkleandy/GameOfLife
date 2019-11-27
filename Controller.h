@@ -19,8 +19,8 @@
 class Controller
 {
 private:
-	Model mModel;
-	View mView;
+	Model & mModel;
+	View & mView;
 	bool mQuit{ false };
 	int mSpeed{ 500 };
 	ConsoleKeyReader & mReader;
@@ -59,7 +59,7 @@ private:
 		Model_ToggleBorder = 'B',
 
 		Console_SwitchColor = 'P',
-		Console_toggleBg = 'O',
+		Console_ToggleBg = 'O',
 
 		Model_Random01 = 'A',
 		Model_Random05 = 'S',

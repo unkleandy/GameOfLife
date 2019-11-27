@@ -9,31 +9,28 @@
 
 // headers
 #include "rleUtil.h"
-
-//int main()
-//{
-//	std::string txt="x = 76, y = 53, rule = B3/S23 ";
-//	std::string matrix = "\nobo$b2o$bo17$20bo$21b2o$20b2o5$51b2o$52bo$52bobo$42bo10b2o$40b3o$39bo$\n39b2o$24b2o48b2o$25bo48b2o$25bob2o$26bo2bo23bo$27b2o24bo$42b2o9b3o$42b\n2o11bo4$51bo3b2o$50bobo3bo$49bobo3bo$45b2obobo3bo$45b2obo2b4obo5b2o$\n49bobo3bobo5bo$45b2ob2o2bo2bobo2b3o$46bobo2b2o3bo3bo$34b2o10bobo$34b2o\n11bo!";
-//	RleUtil rle;
-//	rle.setDimRuleFromString(txt);
-//	rle.setMatrixFromString(matrix);
-//	rle.cellmatrix().show();
-//	return 0;
-//}
+#include "Main.h"
 
 
-RleUtil::RleUtil() :mCM{} {}
+RleUtil::RleUtil()
+	:
+	mCM{},
+	mRule { {2, 3}, { 2 }}
+{
+	
+}
 
-RleUtil::RleUtil(std::string path)
+
+int RleUtil::openFile(std::string path)
 {
 //TODO open fstream
-
+	std::cout << path << std::endl;
 	std::ifstream file(path);
 	if (file.is_open())
 	{
 		std::regex reComment("#[NnCcOcRr].*");
-		std::regex reDimRule("[Xx] *= *[[:digit:]][[:digit:]]*, *[Yy].*");
-		std::regex reMatrixLine("[ob\\$\\d]*.*");
+		std::regex reDimRule("[Xx] *= *\\d\\d*, *[Yy].*");
+		std::regex reMatrixLine("[ob\\$\\d][ob\\$\\d]*.*");
 		std::regex reLastLine("[ob\\$\\d]*!.*");
 
 		std::string line{};
@@ -45,42 +42,76 @@ RleUtil::RleUtil(std::string path)
 		while (getline(file, line))
 		{
 			if (line.length() == 0) {}
-			else if (std::regex_match(line, reComment)) {/* std::cout << "RleUtil::RleUtil commentaire  : " + line << std::endl;*/ }
-			else if (std::regex_match(line, reDimRule)) { dimRuleInfo = line; bool info = true;   /*std::cout << "RleUtil::RleUtil dim et regle  : " + dimRuleInfo << std::endl;*/ }
-			else if (std::regex_match(line, reLastLine)) { lastline = true;  matrixInfo += line; /*std::cout<<"RleUtil::RleUtil last line  : " + matrixInfo << std::endl;*/}
-			else if (std::regex_match(line, reMatrixLine)) { matrixInfo += line; /*std::cout << "RleUtil::RleUtil matrice  : " + matrixInfo << std::endl;*/ }
+			else if (std::regex_match(line, reComment)) { std::cout << "RleUtil::openFile commentaire  : " + line << std::endl; }
+			else if (std::regex_match(line, reDimRule)) 
+			{ 
+				info = true;
+				dimRuleInfo = line; 
+				std::cout << "RleUtil::openFile dim et regle  : " + dimRuleInfo << std::endl; 
+			}
+			else if (std::regex_match(line, reLastLine)) 
+			{ 
+				lastline = true;  
+				matrixInfo += line; 
+				std::cout << "RleUtil::openFile matrixInfo : " + matrixInfo<< std::endl;
+				break; 
+			}
+			else if (std::regex_match(line, reMatrixLine)) { matrixInfo += line; }
+			else if (lastline == false) { return-1; }
 		}
 
 		// testing
-		std::cout << "RleUtil::RleUtil dimRuleInfo : " << dimRuleInfo << std::endl;
-		std::cout << "RleUtil::RleUtil matrixInfo : " << matrixInfo << std::endl;
-
-		setDimRuleFromString(dimRuleInfo);
-		setMatrixFromString(matrixInfo);
-
-		//TODO close fstream
+		//std::cout << "RleUtil::RleUtil dimRuleInfo : " << dimRuleInfo << std::endl;
+		//std::cout << "RleUtil::RleUtil matrixInfo : " << matrixInfo << std::endl;
+		if (info == false)
+		{
+			std::cout << "RleUtil::openFile no rule info" << std::endl;
+			return -1;
+		}
+		else if (!lastline)
+		{
+			std::cout << "RleUtil::openFile no last line" << std::endl;
+			return -1;
+		}
+		else if (setDimRuleFromString(dimRuleInfo) != 0)
+		{
+			std::cout << "RleUtil::openFile failed setDimRuleFromString" << std::endl;
+			return -1;
+		}
+		else if (setMatrixFromString(matrixInfo) != 0)
+		{
+			std::cout << "RleUtil::openFile failed setMatrixFromString" << std::endl;
+			return -1;
+		}
+		else
+		{
+			file.close();
+			return 0;
+		}
 	}
+	else return -1;
 }
 
 
 void RleUtil::nextLine(itCM& it, int mult)
 {
-	mult = mult ? mult : 1;
 	itCM start{ mCM.matrix().begin() };
+	assert(it + start < mCM.matrix().end());
 	it = start + (ceil(std::distance(start, it) / mCM.x()) + mult)*mCM.x();
-	assert(it < mCM.matrix().end());
 }
 
 
-void RleUtil::setMatrixFromString(std::string str)
+int RleUtil::setMatrixFromString(std::string str)
 {
-
-	itCM currentCell { mCM.matrix().begin() };
+	itCM start = mCM.matrix().begin();
+	itCM end = mCM.matrix().end();
+	itCM currentCell { start };
 	int cellsInLine{};
 	int cellLine{};
 
 	std::string multiplier{};
 	int mult{};
+	bool deadCellsOnly{ true };
 
 	for (int i{}; i<str.length();++i)
 	{	
@@ -88,8 +119,13 @@ void RleUtil::setMatrixFromString(std::string str)
 		{
 		case 'o':
 			mult = ((multiplier.size()==0) ? 1 : stoi(multiplier));
-			assert(currentCell + std::stoi(multiplier) < mCM.matrix().end());
+			if (currentCell + mult > end)
+			{	
+				std::cout << "RleUtil::setMatrixFromString exceeds matrix size" << std::endl;
+				return -1;
+			}
 			mCM.travelCellMatrix(&Cell::setStateActive, currentCell, currentCell + mult);
+			deadCellsOnly = false;
 			multiplier = "";
 			break;
 		case 'b':
@@ -99,23 +135,41 @@ void RleUtil::setMatrixFromString(std::string str)
 			break;
 		case '$':
 			mult = ((multiplier.size() == 0) ? 1 : stoi(multiplier));
-			nextLine(currentCell, mult);
+			if (end >= start + (floor(std::distance(start, currentCell) / mCM.x()) + mult)*mCM.x())
+			{
+				nextLine(currentCell, mult);	
+			}
+			else { return -1; }
+			cellLine += mult;
 			multiplier = "";
 			break;
 		case '\n': 
 		case '\r':
+		case ' ':
 			break;
 		default:
 			multiplier += str[i];
 			break;
 		}
 
-		if (cellsInLine >= mCM.x()) { std::cout << "CellMatrix width exeeded" << std::endl; }
-		//TODO open next RLEfile
-		if (cellLine >= mCM.y()) { std::cout << "CellMatrix height exeeded" << std::endl; }
-		//TODO open next RLEfile
+	}
+	if (deadCellsOnly) 
+	{ 
+		std::cout << "RleUtil::setMatrixFromString deadCells only" << std::endl;
+		return -1; 
+	}
+	else if (cellLine > mCM.y()) 
+	{ 
+		std::cout << "CellMatrix height exeeded" << std::endl; 
+		return -1; 
+	}
+	else
+	{
+		std::cout << "no problen should run" << std::endl; 
+		return 0;
 	}
 }
+
 
 
 std::vector<int> RleUtil::string2IntVect(std::string str)
@@ -130,28 +184,41 @@ std::vector<int> RleUtil::string2IntVect(std::string str)
 }
 
 
-void RleUtil::setDimRuleFromString(std::string str)
+int RleUtil::setDimRuleFromString(std::string str)
 {
-	std::regex re("([XxYy]) *= *([[:digit:]]*) *, *([XxYy]) *= *([[:digit:]]*) *, *[Rr]ule *= *[Bb]?([[:digit:]]*)\\/[Ss]?([[:digit:]]*)");
+	std::regex reDim("([XxYy]) *= *(\\d\\d*) *, *([XxYy]) *= *(\\d\\d*)");
+	std::regex reRule("[Rr]ule? *= *[Bb]?(\\d*)\\/[Ss]?(\\d*)");
 	std::string xDim{}, yDim{}, bRule{}, sRule{};
-	std::smatch matches;
+	std::smatch matchesDim;
+	std::smatch matchesRule;
 
-	std::regex_search(str, matches, re);
-	toupper(matches.str(1)[0]) == 'X' ? xDim = (std::string) matches.str(2) : yDim = (std::string) matches.str(2);
-	toupper(matches.str(2)[0]) == 'X' ? xDim = (std::string) matches.str(4) : yDim = (std::string) matches.str(4);
-	
-	sRule = (std::string) matches.str(5);
-	bRule = (std::string) matches.str(6);
-	
+	std::regex_search(str, matchesDim, reDim);
+	if (!matchesDim.empty())
+	{
+		toupper(matchesDim.str(1)[0]) == 'X' ? xDim = (std::string) matchesDim.str(2) : yDim = (std::string) matchesDim.str(2);
+		toupper(matchesDim.str(2)[0]) == 'X' ? xDim = (std::string) matchesDim.str(4) : yDim = (std::string) matchesDim.str(4);
+		int x = stoi(xDim);
+		int y = stoi(yDim);
+		if (x>dim || y>dim ||x<2||y<2)
+		{
+			std::cout << "dim inapropriate"<<std::endl;
+			return -1;
+		}
+		else
+		{
+			mCM.setSize(x, y);
+			return 0;
+		}
+	}
+	else return -1;
 
-////testing
-//	std::cout << "RleUtil::setDimRuleFromString xDim : " << xDim << std::endl;
-//	std::cout << "RleUtil::setDimRuleFromString yDim : " << yDim << std::endl;
-//	std::cout << "RleUtil::setDimRuleFromString bRule : " << bRule << std::endl;
-//	std::cout << "RleUtil::setDimRuleFromString sRule : " << sRule << std::endl;
-
-	mRule.setRule(string2IntVect(bRule), string2IntVect(sRule));
-	mCM.setSize(std::stoi(xDim), std::stoi(yDim));
+	std::regex_search(str, matchesRule, reRule);
+	if (!matchesRule.empty())
+	{
+		sRule = (std::string) matchesRule.str(1);
+		bRule = (std::string) matchesRule.str(2);
+		mRule.setRule(string2IntVect(bRule), string2IntVect(sRule));
+	}	
 }
 
 

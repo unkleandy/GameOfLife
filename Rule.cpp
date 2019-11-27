@@ -25,6 +25,13 @@ int Rule::defineRule(std::vector<int> r)
 	return rule;
 }
 
+void Rule::setRuleTo(Rule rule)
+{
+	mBorn = rule.mBorn;
+	mSurvive = rule.mSurvive;
+}
+
+
 int Rule::born()
 {
 	return mBorn;

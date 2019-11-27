@@ -26,9 +26,7 @@ Controller::Controller(Model & m, View & v)
 	mView{ v }, 
 	mModelAction(),
 	mReader{ Console::getInstance().keyReader() }
-{
-	keybinding();
-}
+{ keybinding(); }
 
 
 
@@ -41,8 +39,7 @@ Controller::~Controller()
 void Controller::run()
 {
 	bool quit{};
-	std::string path{"./fichiers_test_rle/snarkcatalystvariants.rle"};
-	RleUtil rle(path);
+	
 	
 	mReader.installFilter(new ConsoleKeyFilterDown);
 	mReader.installFilter(new ConsoleKeyFilterModifiers);
@@ -50,15 +47,12 @@ void Controller::run()
 	
 	ConsoleKeyReader::KeyEvents events;
 
-	mModel.gol().importAndCenterCellmatrix(rle.cellmatrix());
 	
 	while (!mQuit) 
 	{
-		//system("cls");
-		
 		mView.showCurrent(mModel.cellmatrix());
 		mModel.gol().evolveMatrix();
-		//std::this_thread::sleep_for(std::chrono::milliseconds(mSpeed));
+		std::this_thread::sleep_for(std::chrono::milliseconds(mSpeed));
 		Console::getInstance().keyReader().read(events);
 		if (events.size() != 0) 
 		{
@@ -92,7 +86,7 @@ void Controller::keybinding()
 	mModelAction.setAction((int)KeyBinding::Model_NextRule, [](Model & model, Controller & controller, View & view)-> void { model.nextRule(); });
 
 	mModelAction.setAction((int)KeyBinding::Console_SwitchColor, [](Model & model, Controller & controller, View & view)-> void { view.changeTextColor(); });
-	mModelAction.setAction((int)KeyBinding::Console_SwitchColor, [](Model & model, Controller & controller, View & view)-> void { view.toggleBackgroundColor(); });
+	mModelAction.setAction((int)KeyBinding::Console_ToggleBg, [](Model & model, Controller & controller, View & view)-> void { view.toggleBackgroundColor(); });
 
 	mModelAction.setAction((int)KeyBinding::Model_Random01, [](Model & model, Controller & controller, View & view)-> void { model.randomiseMatrix(0.01); });
 	mModelAction.setAction((int)KeyBinding::Model_Random05, [](Model & model, Controller & controller, View & view)-> void { model.randomiseMatrix(0.05); });
@@ -101,8 +95,8 @@ void Controller::keybinding()
 	mModelAction.setAction((int)KeyBinding::Model_Random25, [](Model & model, Controller & controller, View & view)-> void { model.randomiseMatrix(0.25); });
 	mModelAction.setAction((int)KeyBinding::Model_Random50, [](Model & model, Controller & controller, View & view)-> void { model.randomiseMatrix(0.50); });
 	
-	//mModelAction.setAction((int)KeyBinding::Model_PrevRle, [](Model & model, Controller & controller, View & view)-> void { model.prevRle(); });
+	mModelAction.setAction((int)KeyBinding::Model_PrevRle, [](Model & model, Controller & controller, View & view)-> void { model.prevRle(); });
 	//mModelAction.setAction((int)KeyBinding::Model_SameRle, [](Model & model, Controller & controller, View & view)-> void { model.sameRle(); });
-	//mModelAction.setAction((int)KeyBinding::Model_NextRle, [](Model & model, Controller & controller, View & view)-> void { model.nextRle(); });
+	mModelAction.setAction((int)KeyBinding::Model_NextRle, [](Model & model, Controller & controller, View & view)-> void { model.nextRle(); });
 
 }

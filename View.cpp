@@ -19,10 +19,10 @@ View::View()
 				ConsoleColor::Background::Yellow, 
 				ConsoleColor::Background::Magenta,
 				ConsoleColor::Background::Cyan, 
-				ConsoleColor::Background::Black
 	},
 	mTextColorIt{ mTextColors.begin() },
 	mCurrentTextColor{ * mTextColors.begin() },
+	mBackgroundColorIt{ mBackgroundColors.begin() },
 	mCurrentBackgroundColor{ ConsoleColor::Background::Black }
 {
 	mWriter.createImage("output") ; 
@@ -51,15 +51,19 @@ void View::changeTextColor()
 {
 
 	++mTextColorIt;
+	++mBackgroundColorIt;
+	if (mBackgroundColorIt == mBackgroundColors.end())
+	{
+		mTextColorIt = mTextColors.begin();
+		mBackgroundColorIt = mBackgroundColors.begin();
+	}
 	mCurrentTextColor = *mTextColorIt;
+
 }
 
 void View::toggleBackgroundColor()
 {
-	//if (mCurrentBackgroundColor == ConsoleColor::Background::Black)
-	//{
-	////	{ mCurrentBackgroundColor = (ConsoleColor::Background) mCurrentTextColor; }
-	//	{ mCurrentBackgroundColor = *(mBackgroundColors.begin() + (std::distance(mTextColors.begin(), mTextColorIt)); }
-	//}
-	//else { mCurrentBackgroundColor = ConsoleColor::Background::Black; }
+	if (mCurrentBackgroundColor == ConsoleColor::Background::Black)
+		{ mCurrentBackgroundColor = *(mBackgroundColorIt); }
+	else { mCurrentBackgroundColor = ConsoleColor::Background::Black; }
 }

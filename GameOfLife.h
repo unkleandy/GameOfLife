@@ -36,6 +36,7 @@ public:
 	void importAndCenterCellmatrix(CellMatrix rleCM);
 	void evolveMatrix();
 	CellMatrix & cellmatrix();
+	Rule & rule();
 };
 
 #endif // !_GAMEOFLIFE_H_

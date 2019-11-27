@@ -24,13 +24,14 @@ class RleUtil
 private:
 	Rule mRule;
 	CellMatrix mCM;
+
 	std::vector<int> string2IntVect(std::string str);
 	void nextLine(itCM& it, int mult);
 public:
-	void setMatrixFromString( std::string );
+	int setMatrixFromString( std::string );
 	//void setMatrixFromSmatch(const std::smatch &);
-	void setDimRuleFromString(std::string str);
-	RleUtil(std::string path);
+	int setDimRuleFromString(std::string str);
+	int openFile(std::string path);
 	RleUtil();
 	// getters
 	Rule rule();
