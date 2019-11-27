@@ -1,9 +1,11 @@
 #include "View.h"
 
 
+
 View::View()
 	:
 	mWriter{ Console::getInstance().writer() },
+	mColorManager{},
 	mTextColors{ ConsoleColor::Text::BrightWhite, 
 				ConsoleColor::Text::BrightRed, 
 				ConsoleColor::Text::BrightGreen, 
@@ -12,7 +14,8 @@ View::View()
 				ConsoleColor::Text::BrightMagenta, 
 				ConsoleColor::Text::BrightCyan 
 	},
-	mBackgroundColors{ ConsoleColor::Background::White, 
+	mBackgroundColors{ ConsoleColor::Background::Black,
+				ConsoleColor::Background::White, 
 				ConsoleColor::Background::Red, 
 				ConsoleColor::Background::Green,
 				ConsoleColor::Background::Blue,
@@ -23,15 +26,16 @@ View::View()
 	mTextColorIt{ mTextColors.begin() },
 	mCurrentTextColor{ * mTextColors.begin() },
 	mBackgroundColorIt{ mBackgroundColors.begin() },
-	mCurrentBackgroundColor{ ConsoleColor::Background::Black }
+	mCurrentBackgroundColor{ * mBackgroundColors.begin() }
 {
 	mWriter.createImage("output") ; 
+	
 }
 
 
 void View::showCurrent(CellMatrix & currentCellMatrix) 
 {
-	mWriter.image("output").fill(cellInactive, mCurrentBackgroundColor);
+	//mWriter.image("output").fill(cellInactive, mCurrentBackgroundColor);
 	char c;
 	itCM currentCell{ currentCellMatrix.matrix().begin() };
 	for (int posY{}; posY < currentCellMatrix.y(); ++posY)
@@ -39,7 +43,12 @@ void View::showCurrent(CellMatrix & currentCellMatrix)
 		for (int posX{ 0 }; posX < currentCellMatrix.x(); ++posX)
 		{
 			c = (*currentCell).state() ? cellActive : cellInactive;
-			mWriter.image("output").drawPoint(posX, posY, c, mCurrentTextColor);
+			if (c == cellInactive) {
+				mWriter.image("output").drawPoint(posX, posY, c, mCurrentBackgroundColor);
+			}
+			else {
+				mWriter.image("output").drawPoint(posX, posY, c, mCurrentTextColor);
+			}
 			++currentCell;
 		}
 	}
@@ -48,6 +57,7 @@ void View::showCurrent(CellMatrix & currentCellMatrix)
 
 void View::changeTextColor()
 {
+
 	++mTextColorIt;
 	++mBackgroundColorIt;
 	if (mBackgroundColorIt == mBackgroundColors.end())
@@ -56,6 +66,15 @@ void View::changeTextColor()
 		mBackgroundColorIt = mBackgroundColors.begin();
 	}
 	mCurrentTextColor = *mTextColorIt;
+
+}
+
+void View::headache(CellMatrix & currentCellMatrix)
+{
+	mCurrentBackgroundColor = mColorManager.getBackgroundColor();
+	mCurrentTextColor = mColorManager.getTextColor();
+	showCurrent(currentCellMatrix);
+	mColorManager.colorAnimate();
 }
 
 void View::toggleBackgroundColor()
