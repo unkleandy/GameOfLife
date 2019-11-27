@@ -26,7 +26,6 @@ View::View()
 	mCurrentBackgroundColor{ ConsoleColor::Background::Black }
 {
 	mWriter.createImage("output") ; 
-	
 }
 
 
@@ -49,7 +48,6 @@ void View::showCurrent(CellMatrix & currentCellMatrix)
 
 void View::changeTextColor()
 {
-
 	++mTextColorIt;
 	++mBackgroundColorIt;
 	if (mBackgroundColorIt == mBackgroundColors.end())
@@ -58,7 +56,6 @@ void View::changeTextColor()
 		mBackgroundColorIt = mBackgroundColors.begin();
 	}
 	mCurrentTextColor = *mTextColorIt;
-
 }
 
 void View::toggleBackgroundColor()
