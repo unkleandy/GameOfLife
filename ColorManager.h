@@ -1,3 +1,13 @@
+// Context		:	A2019 420-B52 Travail-Pratique 1
+// Teacher		:	Jean-Christophe Demers
+// Contents		:	View Class
+// Description	:	
+// Auteurs		:	Cito Buhendwa
+// Date			:	2019-11-16
+// Comments		:
+
+
+
 #pragma once
 #include "./Console/ConsoleColor.h"
 #include <thread>			// for timer
