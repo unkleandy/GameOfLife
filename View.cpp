@@ -43,7 +43,12 @@ void View::showCurrent(CellMatrix & currentCellMatrix)
 		for (int posX{ 0 }; posX < currentCellMatrix.x(); ++posX)
 		{
 			c = (*currentCell).state() ? cellActive : cellInactive;
-			mWriter.image("output").drawPoint(posX, posY, c, mCurrentTextColor);
+			if (c == cellInactive){
+				mWriter.image("output").drawPoint(posX, posY, c, mCurrentBackgroundColor);
+			} else {
+				mWriter.image("output").drawPoint(posX, posY, c, mCurrentTextColor);
+			}
+			
 			++currentCell;
 		}
 	}
