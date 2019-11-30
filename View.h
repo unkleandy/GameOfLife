@@ -30,13 +30,15 @@ private:
 	std::vector< ConsoleColor::Background>::iterator mBackgroundColorIt;
 	ConsoleColor::Text & mCurrentTextColor;
 	ConsoleColor::Background & mCurrentBackgroundColor;
+	bool mheadacheMode{ false };
 	
 public:
 	View();
 	void showCurrent(CellMatrix & currentCellMatrix);
 	void toggleBackgroundColor();
 	void changeTextColor();
-	void headache(CellMatrix & currentCellMatrix);
+	void headache();
+	void toggleHeadache();
 };
 
 

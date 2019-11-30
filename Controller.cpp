@@ -63,7 +63,6 @@ void Controller::run()
 
 
 
-
 void Controller::quit() { mQuit = true; }
 void Controller::changeSpeed(unsigned int timesFaster) { mSpeed = (int) (500 / timesFaster); }
 
@@ -96,7 +95,9 @@ void Controller::keybinding()
 	mModelAction.setAction((int)KeyBinding::Model_Random50, [](Model & model, Controller & controller, View & view)-> void { model.randomiseMatrix(0.50); });
 	
 	mModelAction.setAction((int)KeyBinding::Model_PrevRle, [](Model & model, Controller & controller, View & view)-> void { model.prevRle(); });
-	//mModelAction.setAction((int)KeyBinding::Model_SameRle, [](Model & model, Controller & controller, View & view)-> void { model.sameRle(); });
+	mModelAction.setAction((int)KeyBinding::Model_SameRle, [](Model & model, Controller & controller, View & view)-> void { model.sameRle(); });
 	mModelAction.setAction((int)KeyBinding::Model_NextRle, [](Model & model, Controller & controller, View & view)-> void { model.nextRle(); });
+	
+	mModelAction.setAction((int)KeyBinding::View_Bonus, [](Model & model, Controller & controller, View & view)-> void { view.toggleHeadache(); });
 
 }

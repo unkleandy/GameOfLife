@@ -52,7 +52,6 @@ void ColorManager::changeBackgroundColor()
 
 void ColorManager::colorAnimate()
 {
-	// partir le timer
 	static int compteur;
 
 	// change les couleurs 

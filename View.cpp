@@ -35,6 +35,8 @@ View::View()
 
 void View::showCurrent(CellMatrix & currentCellMatrix) 
 {
+	if (mheadacheMode)
+		headache();
 	mWriter.image("output").fill(cellInactive, mCurrentBackgroundColor);
 	char c;
 	itCM currentCell{ currentCellMatrix.matrix().begin() };
@@ -69,11 +71,10 @@ void View::changeTextColor()
 
 }
 
-void View::headache(CellMatrix & currentCellMatrix)
+void View::headache()
 {
 	mCurrentBackgroundColor = mColorManager.getBackgroundColor();
 	mCurrentTextColor = mColorManager.getTextColor();
-	showCurrent(currentCellMatrix);
 	mColorManager.colorAnimate();
 }
 
@@ -82,4 +83,9 @@ void View::toggleBackgroundColor()
 	if (mCurrentBackgroundColor == ConsoleColor::Background::Black)
 		{ mCurrentBackgroundColor = *(mBackgroundColorIt); }
 	else { mCurrentBackgroundColor = ConsoleColor::Background::Black; }
+}
+
+void View::toggleHeadache()
+{
+	mheadacheMode = !mheadacheMode;
 }

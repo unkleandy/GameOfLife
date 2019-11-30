@@ -13,7 +13,7 @@
 
 #include "Model.h"
 #include "View.h"
-#include "EcaActionKeyBinding.h"
+#include "ActionKeyBinding.h"
 
 
 class Controller
@@ -40,7 +40,7 @@ public:
 private: 
 	// adaptation du code de JC
 
-	EcaActionKeyBinding mModelAction;
+	ActionKeyBinding mModelAction;
 
 	enum class KeyBinding : char {
 		Action_Quit = 27,	// escape character
@@ -71,6 +71,8 @@ private:
 		Model_PrevRle = 'Z',
 		Model_SameRle = 'X',
 		Model_NextRle = 'W',
+
+		View_Bonus = 'B',
 		_count_
 	};
 };
